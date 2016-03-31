@@ -1,0 +1,13 @@
+noremap q <C-q>
+
+noremap <C-a> <C-Home><C-S-End>
+inoremap <C-a> <C-Home><C-S-End>
+cnoremap <C-a> <C-Home><C-S-End>
+
+colorscheme indigo-fx3
+
+
+"----------------
+"highlight HintElem color: black; background-color: yellow
+"highlight HintActive background-color: #88FF00; color: black
+"hi Hint font-family: monospace; font-size: 10px; font-weight: bold; color: white; background-color: red; border-color: #1c1c1c; border-width: 0px; border-style: solid; padding: 2px 2px 2px 2px;
