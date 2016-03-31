@@ -44,9 +44,6 @@ cmus/.cmus/lib.pl
 ### mpv ###
 mpv/.config/mpv/watch_later/
 
-### neovim ###
-neovim/.local/
-
 ### newsbeuter ###
 newsbeuter/.newsbeuter/
 !newsbeuter/.newsbeuter/config
@@ -66,6 +63,8 @@ zathura/.local/
 
 ### whole apps ###
 atom/
+fonts-icons-themes/
+neovim/
 rtv/
 urxvt/
 viber/
