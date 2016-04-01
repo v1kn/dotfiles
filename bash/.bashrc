@@ -1,7 +1,7 @@
 
 # MENU:
 #----------<PREAMBLE> [-
-#------------------------------
+#-----------------------
 
 # If not running interactively, don't do anything
 case $- in
@@ -29,13 +29,11 @@ if ! shopt -oq posix; then
 fi
 #-]
 
-#----------<CUSTOM BASH PROMPT> [-1
+#----------<CUSTOM BASH PROMPT> [-
 #---------------------------------
+# inspired by: https://github.com/maciakl/.dotfiles/blob/master/.bashrc
 
-eval "`dircolors -b`"
-#PROMPT_DIRTRIM=3
-
-#---------------<ANSI COLOR CODES> [-2
+#---------------<ANSI COLOR CODES> [-
 #------------------------------------
 #0 Black
 #1 Red
@@ -69,66 +67,72 @@ White="\[\033[0;37m\]"
 BRed="\[\033[1;31m\]"
 BPurple="\[\033[1;35m\]"
 
-#-]2
-#---------------<MACIAK PROMPT> [-2
-# as seen in https://github.com/maciakl/.dotfiles/blob/master/.bashrc
-# set up command prompt
-#function __prompt_command()
-#{
-#    # capture the exit status of the last command
-#    EXIT="$?"
-#    PS1=""
-#
-#    if [ $EXIT -eq 0 ]; then PS1+="\[$Green\][\!]\[$Color_Off\] "; else PS1+="\[$Red\][\!]\[$Color_Off\] "; fi
-#
-#    # if logged in via ssh shows the ip of the client
-#    if [ -n "$SSH_CLIENT" ]; then PS1+="\[$Yellow\]("${$SSH_CLIENT%% *}")\[$Color_Off\]"; fi
-#
-#    # debian chroot stuff (take it or leave it)
-#    PS1+="${debian_chroot:+($debian_chroot)}"
-#
-#    # basic information (user@host:path)
-#    PS1+="\[$BRed\]\u\[$Color_Off\]@\[$BRed\]\h\[$Color_Off\]:\[$BPurple\]\w\[$Color_Off\] "
-#
-#    # check if inside git repo
-#    local git_status="`git status -unormal 2>&1`"
-#    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
-#        # parse the porcelain output of git status
-#        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-#            local Color_On=$Green
-#        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
-#            local Color_On=$Purple
-#        else
-#            local Color_On=$Red
-#        fi
-#
-#        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
-#            branch=${BASH_REMATCH[1]}
-#        else
-#            # Detached HEAD. (branch=HEAD is a faster alternative.)
-#            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD`)"
-#        fi
-#
-#        # add the result to prompt
-#        PS1+="\[$Color_On\][$branch]\[$Color_Off\] "
-#    fi
-#
-#    # prompt $ or # for root
-#    PS1+="\$ "
-#}
-#PROMPT_COMMAND=__prompt_command
-#-]2
+#-]
 
-PS1=""
-PS1+="["$Green"bash$Color_Off]:"
-PS1+="[$BPurple\w$Color_Off]>"
-PS1+="\$ "
+eval "`dircolors -b`"
+#PROMPT_DIRTRIM=3
+
+function __prompt_command()
+{
+    # starter
+    PS1=""
+
+    # SSH, client IP
+    if [ -n "$SSH_CLIENT" ]
+    then
+        PS1+="\[$Yellow\]("${$SSH_CLIENT%% *}")\[$Color_Off\]"
+    fi
+
+    # basic info: bash + path
+    PS1+="["$Green"bash$Color_Off]:"
+    PS1+="[$BPurple\w$Color_Off]:"
+
+    # check if inside git repo
+    local git_status="`git status -unormal 2>&1`"
+    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]
+    then
+        # parse the porcelain output of git status
+        if [[ "$git_status" =~ nothing\ to\ commit ]]
+        then
+            local Color_On=$Green
+        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]
+        then
+            local Color_On=$Purple
+        elif [[ "$git_status" =~ Changes\ not\ staged\ for\ commit ]]
+        then
+            local Color_On=$BRed
+        elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]
+        then
+            local Color_On=$Yellow
+        else
+            local Color_On=$BRed
+        fi
+
+        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]
+        then
+            branch=${BASH_REMATCH[1]}
+        else
+            # Detached HEAD. (branch=HEAD is a faster alternative.)
+            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD`)"
+        fi
+
+        # add the result to prompt
+        PS1+=""$White"git\[$Color_On\][$branch]\[$Color_Off\]"
+    fi
+
+    # finisher
+    PS1+=">\$ "
+}
+PROMPT_COMMAND=__prompt_command
+
+#PS1=""
+#PS1+="["$Green"bash$Color_Off]:"
+#PS1+="[$BPurple\w$Color_Off]>"
+#PS1+="\$ "
 
 #PS1='[bash]:[\w]>\$ '
 #PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
-
-
-#-]1
+#-]
 
 #----------<GENERAL MODS> [-
 #-------------------------------------
@@ -249,7 +253,7 @@ alias todaydate='date +%Y%m%d'
 alias emacs='echo "lol, nice try"; sleep .5; vim'
 alias cm='cmatrix -C yellow -b -u 9'
 alias mpvnov='mpv --no-video'
-
+alias dot='cd $HOME/git-repos/dotfiles'
 #-]
 
 #----------<COMPLEX ALIASES> [-
@@ -280,7 +284,6 @@ alias getpage='wget -cNkKE -np -P /home/xuval/Documents/webpages/'
 #alias synapse='Exec=GTK_IM_MODULE='' synapse'
 
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
-
 #-]
 
 #----------<FUNCTIONS> [-
@@ -288,7 +291,8 @@ alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 
 #find . -type f -print0 | sort -zn | xargs -0 -I{} -n1 -P `nproc` sox "{}" -n spectrogram -o "{}.png"
 
-# check if flacs in subdirectories have album art embedded [-
+# FLACs, album art and year [-
+# check if flacs in subdirectories have album art embedded
 checkpicflac() {
     find . -depth -type f -name "*.flac" |
     while read -r track
@@ -300,9 +304,7 @@ checkpicflac() {
         fi
     done
 }
-#-]
-
-# add a YEAR tag to flacs in all subdirectories [-
+# add a YEAR tag to flacs in all subdirectories
 addyearflac() {
     find . -depth -type f -name "*.flac" |
     while read -r track
@@ -311,9 +313,7 @@ addyearflac() {
         metaflac --set-tag="YEAR=$year" "$track"
     done
 }
-#-]
-
-# check whether flacs in subdirectores have a YEAR tag [-
+# check whether flacs in subdirectores have a YEAR tag
 checkyearflac() {
     find . -depth -type f -name "*.flac" |
     while read -r track
@@ -327,7 +327,8 @@ checkyearflac() {
 }
 #-]
 
-# create a spectrogram for flacs inside all subdirectories [-
+# spectrograms [-
+# create a spectrogram for flacs inside all subdirectories
 specallflac() {
     find . -depth -type f -name "*.flac" | sort |
     while read -r file
@@ -335,9 +336,7 @@ specallflac() {
         sox "$file" -n spectrogram -o "$file".png
     done
 }
-#-]
-
-# create a spectrogram for wavs inside all subdirectories [-
+# create a spectrogram for wavs inside all subdirectories
 specallwav() {
     find . -depth -type f -name "*.wav" | sort |
     while read -r file
@@ -345,18 +344,14 @@ specallwav() {
         sox "$file" -n spectrogram -o "$file".png
     done
 }
-#-]
-
-# create a spectrogram for flac inside a single folder [-
+# create a spectrogram for flac inside a single folder
 specflac() {
     for i in *.flac
     do
         sox "$i" -n spectrogram -o "$i".png
     done
 }
-#-]
-
-# create a spectrogram for wavs inside a single folder [-
+# create a spectrogram for wavs inside a single folder
 specwav() {
     for i in *.wav
     do
@@ -371,13 +366,6 @@ dicon() {
 }
 #-]
 
-# list all PPAs installed [-
-listppa() {
-    grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt |
-    sort -u | sed 's/^/ppa:/'
-}
-#-]
-
 # removing build dependencies installed with apt-get build-dep [-
 deprem() {
     sudo aptitude markauto $(apt-cache showsrc $1 | grep Build-Depends |
@@ -385,7 +373,7 @@ deprem() {
 }
 #-]
 
-# showing installed headers [-
+# showing installed headers and kernels [-
 # to uninstall these headers, pipe it through to "| xargs dpkg -r"
 showheader() {
     dpkg-query -l linux-header* | grep 'ii ' |
@@ -395,20 +383,24 @@ showheader() {
         [ ! -z "$v" ] && [ "$v" -le $(uname -r | cut -d- -f 2) ] && echo $k | cut -d' ' -f2
     done
 }
-#-]
-
-# showing installed kernels [-
 showkernel() {
     dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.2' | awk '{print $2}'
 }
-
 #-]
 
-# .gitignore file generation [-
+# git stuff [-
+# .gitignore file generation
 gi() {
     curl -L -s https://www.gitignore.io/api/"$@" ;
 }
-
+# create git repo folder with basic files inside
+mkrep() {
+    mkdir -p $HOME/git-repos/"$@"
+    cd $HOME/git-repos/"$1"
+    touch README.md
+    cp $HOME/git-repos/dotfiles/LICENSE.md .
+    gi linux,vim > .gitignore
+}
 #-]
 
 # playing current dir files with mpv playlist [-
@@ -416,22 +408,54 @@ PlayCurrentDir() {
     mpv --no-video --playlist <(find "$PWD" -type f -follow | sort)
 }
 alias pcd='PlayCurrentDir'
-
 #-]
 
+# getting geolocation info from google maps api [-
 geoloc() {
     wget -O- -q https://maps.googleapis.com/maps/api/geocode/json?address=$1
 }
+#-]
 
-#dist=$(lsb_release -sc)
-#dist="wily"
-#ppas=$(grep -RoPish "ppa.launchpad.net/[^/]+/[^/ ]+" /etc/apt | sort -u)
-#while read -r ppa; do
-#    url="http://$ppa/ubuntu/dists/$dist/"
-#    if [[ $(wget -O /dev/null "$url" 2>&1|grep "200 OK"|wc -l) == "0" ]]; then
-#        echo "$ppa does not have a $dist version"
-#    fi
-#done <<< "$ppas"
+# create directory and cd into it [-
+mkd() {
+    mkdir -p "$@" && cd "$@"
+}
+#-]
 
+# PPA probing [-
+# list all PPAs installed
+listppa() {
+    grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt |
+    sort -u
+}
+# check if PPAs are compatible with this ubuntu version
+checkppa() {
+dist=$(lsb_release -sc)
+ppas=$(grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u)
+#ppas=$(cat /pathto/ppafile)
+while read -r ppa; do
+    url="http://ppa.launchpad.net/$ppa/ubuntu/dists/$dist/"
+    if [[ $(wget -O /dev/null "$url" 2>&1|grep "200 OK"|wc -l) == "0" ]]; then
+        echo "$ppa does not have a $dist version"
+    fi
+done <<< "$ppas"
+}
+#-]
 
+# count lines in files, omitting newlines and/or comments [-
+CountLines_NoNewline() {
+    grep -cve '^\s*$' $1
+}
+CountLines_NoNewline_NoHashComment() {
+    #sed '/^\s*#/d;/^\s*$/d' $1 | wc -l
+    sed '/^\s*#/d;/^\s*$/d' $1 | wc -l
+}
+alias clin='CountLines_NoNewline'
+alias clinc='CountLines_NoNewline_NoHashComment'
+#-]
+
+# get weather on the commandline [-
+wttr() {
+    curl -k "https://wttr.in/$1"
+}
 #-]

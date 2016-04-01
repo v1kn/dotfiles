@@ -23,13 +23,16 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'tpope/vim-characterize'
 "Plug 'tpope/vim-commentary'
 "Plug 'svermeulen/vim-easyclip'
+Plug 'terryma/vim-expand-region'
 "Plug 'tpope/vim-flagship'
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 "Plug 'fatih/vim-go'
 "Plug 'suan/vim-instant-markdown'
 "Plug 'xuhdev/vim-latex-live-preview'
 Plug 'plasticboy/vim-markdown'
+"Plug 'terryma/vim-multiple-cursors'
 "Plug 'tpope/vim-obsession'
+"Plug 'sheerun/vim-polyglot'
 "Plug 'tpope/vim-repeat'
 "Plug 'mhinz/vim-sayonara'
 Plug 'mhinz/vim-startify'
@@ -38,6 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-tmuxify'
 Plug 'tpope/vim-unimpaired'
 "Plug 'lervag/vimtex'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 "-]
@@ -249,6 +253,24 @@ nnoremap <leader>k O<Esc>j
 nnoremap <leader>o o<Esc>k
 nnoremap <leader>l o<Esc>
 
+" reload vimrc
+nnoremap <leader>r :source %<CR>
+
+" save a file
+nnoremap <leader>w :w<CR>
+
+" manipulating clipboard  pastes
+vmap <leader>y "+y
+vmap <leader>d "+d
+vmap <leader>p "+p
+vmap <leader>P "+P
+nmap <leader>p "+p
+nmap <leader>P "+P
+nmap <leader>y "+yy
+
+" toggle set paste
+set pastetoggle=<F6>
+
 "-]
 
 "----------<THEMING> [-
@@ -283,8 +305,8 @@ set background=dark
 "-------------------------------------
 
 " remove trailing white space
-command Nows :%s/\s\+$//
-command Showmark :InstantMarkdownPreview
+command! Nows :%s/\s\+$//
+command! Showmark :InstantMarkdownPreview
 
 " remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -303,6 +325,45 @@ endfunction
 
 "----------<EXPERIMENTAL> [-1
 "---------------------------
+
+" Follow symlinks when opening a file (git + fugitive) [-
+" NOTE: this happens with directory symlinks anyway (due to Vim's chdir/getcwd
+"       magic when getting filenames).
+"  - https://github.com/tpope/vim-fugitive/issues/147#issuecomment-7572351
+"  - http://www.reddit.com/r/vim/comments/yhsn6/is_it_possible_to_work_around_the_symlink_bug/c5w91qw
+
+function! MyFollowSymlink(...)
+   if exists('w:no_resolve_symlink') && w:no_resolve_symlink
+     return
+   endif
+   let fname = a:0 ? a:1 : expand('%')
+   if fname =~ '^\w\+:/'
+     " Do not mess with 'fugitive://' etc.
+     return
+   endif
+   let fname = simplify(fname)
+
+   let resolvedfile = resolve(fname)
+   if resolvedfile == fname
+     return
+   endif
+   let resolvedfile = fnameescape(resolvedfile)
+   let sshm = &shm
+   set shortmess+=A  " silence ATTENTION message about swap file (would get displayed twice)
+   exec 'file ' . resolvedfile
+   let &shm=sshm
+
+   " Re-init fugitive.
+   call fugitive#detect(resolvedfile)
+   if &modifiable
+     " Only display a note when editing a file, especially not for `:help`.
+     redraw  " Redraw now, to avoid hit-enter prompt.
+     echomsg 'Resolved symlink: =>' resolvedfile
+   endif
+ endfunction
+ command! FollowSymlink call MyFollowSymlink()
+ command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
+ au BufReadPost * nested call MyFollowSymlink(expand('%'))
 
 " better external text formatter
 "set formatprg=par\ -w70

@@ -1,0 +1,71 @@
+## Newsbeuter config file
+
+#-----------------------------------------------
+# general
+#-----------------------------------------------
+
+article-sort-order      date-desc
+
+auto-reload		yes
+suppress-first-reload	yes
+reload-time		180
+
+browser			firefox
+
+download-full-page	yes
+
+max-items		2000
+
+refresh-on-startup	no
+
+reload-threads		2
+
+confirm-exit		yes
+
+player mpv
+
+download-path /home/vlkn/Downloads/podbeuter/
+
+#------------------------------------------------
+# interface customization. syntax:
+# color	<element> <fg color> <bg color> <argument
+#------------------------------------------------
+# currently customized for solarized theme under tmux+tmuxinator
+color listnormal cyan default dim
+color listnormal_unread yellow default
+color listfocus black green dim
+color listfocus_unread white green
+color info white black
+color article default default
+#color background   default   default
+#color listnormal   default   default
+#color listfocus    black     yellow
+#color listfocus_unread white green
+#color info         default   black
+#color article      default   default
+#color background white black
+
+#-------------
+# key bindings and macros
+#-------------
+bind-key h quit
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key m toggle-show-read-feeds
+bind-key u home
+bind-key i end
+bind-key P pb-purge
+bind-key ^F pagedown
+bind-key ^B pageup
+bind-key ^U show-urls
+macro w set browser "feh %u" ; open ; set browser "firefox %u" ; quit
+
+#--------------
+# notifications
+#--------------
+notify-format	"%d new articles, in %D feeds"
+notify-beep	yes
+notify-xterm	yes
+notify-screen	yes
+notify-program	"/usr/bin/notify-send"

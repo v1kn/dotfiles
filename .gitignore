@@ -32,7 +32,7 @@ vim/.vim/plugged/
 *cache*
 
 ### clementine ###
-clementine/.config/Clementine
+clementine/.config/Clementine/*
 !clementine/.config/Clementine/Clementine.conf
 
 ### cmus ###
@@ -45,7 +45,7 @@ cmus/.cmus/lib.pl
 mpv/.config/mpv/watch_later/
 
 ### newsbeuter ###
-newsbeuter/.newsbeuter/
+newsbeuter/.newsbeuter/*
 !newsbeuter/.newsbeuter/config
 
 ### ranger ###
