@@ -94,9 +94,9 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.linenr = ''
 "-]2
 "---------------<SYNTASTIC> [-2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
@@ -222,32 +222,25 @@ set clipboard=unnamed
 
 "----------<KEY MAPPINGS> [-
 "---------------------------
-
-" map the leader
-"let mapleader = ","
+" leader
 let mapleader = "\<Space>"
 
-" map <C-L> to also turn off search highlighting
+" <C-L> to turn off search highlighting
 nnoremap <C-L> :nohl<CR><C-L>
 
 " select previously pasted text, or read into the buffer via :r!
 nnoremap gV `[V`]
 
-    " use F5 to choose a buffer from the list
+" F5 to choose buffer from list
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
-" enter and shift-enter as a newline in normal mode
-"nmap <CR> o<Esc>
-
-" enable jj in insert mode to exit to normal mode
+" jj in insert mode exits to normal mode
 inoremap jj <ESC>
 
 " save read-only files with sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" shift enter adds a newline without moving the cursor
-"nmap <C-o> O<Esc>
-"nmap <C-l> o<Esc>
+" add a newline in normal mode
 nnoremap <leader>i O<Esc>
 nnoremap <leader>k O<Esc>j
 nnoremap <leader>o o<Esc>k
