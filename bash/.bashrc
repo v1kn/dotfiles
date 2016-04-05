@@ -310,65 +310,25 @@ PlayCurrentDir() {
 }
 alias pcd='PlayCurrentDir'
 
-#find . -type f -print0 | sort -zn | xargs -0 -I{} -n1 -P `nproc` sox "{}" -n spectrogram -o "{}.png"
-
 # multi-folder spectrograms
-spectro_flac_mass() {
-    find . -depth -type f -name "*.flac" | sort |
-    while read -r file
-    do
-        sox "$file" -n spectrogram -o "$file".png
-    done
-}
-# as above but more powerful; parallel processes and proper output
-spectro_flac_mass2() {
-    find . -depth -type f -name "*.flac" -print0 | sort -zn | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'sox "{}" -n spectrogram -o "{}.png"; echo processed "{}"'
-}
-spectro_wav_mass() {
-    find . -depth -type f -name "*.wav" | sort |
-    while read -r file
-    do
-        sox "$file" -n spectrogram -o "$file".png
-    done
-}
-spectro_mp3_mass() {
-    find . -depth -type f -name "*.wav" | sort |
-    while read -r file
-    do
-        sox "$file" -n spectrogram -o "$file".png
-    done
-}
-# single folder spectrograms
 spectro_flac() {
-    for i in *.flac
-    do
-        sox "$i" -n spectrogram -o "$i".png
-    done
+    find . -depth -type f -name "*.flac" -print0 | sort -zn |
+    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'sox "{}" -n spectrogram -o "{}.png"
+    echo processed "{}"'
 }
-spectro_wav() {
-    for i in *.wav
-    do
-        sox "$i" -n spectrogram -o "$i".png
-    done
+# as above but more powerful; arrays, parallel processes and proper output
+spectro_mass() {
+    ext=( -name \*.wav -o -name \*.flac -o -name \*.ape -o -name \*.m4a -o -name \*.mp3 -o -name \*.ogg )
+    find . -depth -type f \( "${ext[@]}" \) -print0 | sort -zn |
+    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'sox "{}" -n spectrogram -o "{}.png"; echo processed "{}"'
 }
-spectro_mp3() {
-    for i in *.mp3
-    do
-        sox "$1" -n spectrogram -o "$i".png
-    done
-}
-alias spcfm='spectro_flac_mass'
-alias spcfm2='spectro_flac_mass2'
-alias spcwm='spectro_wav_mass'
-alias spcmm='spectro_mp3_mass'
+alias spc='spectro_mass'
 alias spcf='spectro_flac'
-alias spcw='spectro_wav'
-alias spcm='spectro_mp3'
 # play only audio from videos on the internet
-vid_sound() {
+novid_sound() {
     livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --no-video --cache 10240" $1
 }
-alias snd=vid_sound
+alias snd=novid_sound
 #-]
 
 #       Video [-
@@ -466,6 +426,14 @@ mkrep() {
     cp $HOME/git-repos/dotfiles/LICENSE.md .
     gi linux,vim > .gitignore
 }
+# git fetch for multiple repos
+gfall() {
+    ls | xargs -I{} -n1 -P$(nproc) git -C {} fetch
+}
+# git pull for multiple repos
+gpall() {
+    ls | xargs -i{} -n1 -P$(nproc) git -C {} pull
+}
 #-]
 
 #       Filesystem [-
@@ -485,6 +453,15 @@ CountLines_NoNewline_NoHashComment() {
 }
 alias clin='CountLines_NoNewline'
 alias clinc='CountLines_NoNewline_NoHashComment'
+
+# scroll a file from the commandline
+scroll() {
+    while read -r
+    do
+        echo $REPLY
+        sleep ${1:-0.5}
+    done
+}
 #-]
 
 #       Web APIs [-
@@ -494,9 +471,10 @@ alias clinc='CountLines_NoNewline_NoHashComment'
 geoloc() {
     wget -O- -q https://maps.googleapis.com/maps/api/geocode/json?address=$1
 }
-
 # get weather on the commandline
 wttr() {
     curl -k "https://wttr.in/$1"
 }
+# tny urls
+
 #-]
