@@ -1,0 +1,5 @@
+# enabling making fat partition over a whole disk (like USB sticks)
+mkfs.vfat -I /dev/sdX
+
+# creating a label for the partition
+mkfs.vfat -I /dev/sdX -n label

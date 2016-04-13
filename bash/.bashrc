@@ -238,7 +238,7 @@ alias bc='bc -l'
 alias mkdir='mkdir -pv'
 alias h='history'
 alias ,='ls -CFsph'
-alias h='df -h'
+alias df='df -h -x tmpfs'
 alias d='du -sh .'
 alias D='du -s * | sort -n'
 alias dic='sdcv --color'
@@ -255,6 +255,7 @@ alias cm='cmatrix -C yellow -u 9'
 alias mpvnov='mpv --no-video'
 alias dot='cd $HOME/git-repos/dotfiles'
 alias cal='cal -3':
+alias dfc='dfc -t -tmpfs'
 
 # complex
 alias pipes='$HOME/.filez/scripts-ref/pipsies.sh -p 2 -f 40 -R -r 5000'
@@ -476,5 +477,12 @@ wttr() {
     curl -k "https://wttr.in/$1"
 }
 # tny urls
+tny() {
+    echo $(wget -qO- http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1)
+}
+untny() {
+    echo $(wget -qO- http://tny.im/yourls-api.php?action=expand\&format=simple\&shorturl=$1)
+}
+
 
 #-]

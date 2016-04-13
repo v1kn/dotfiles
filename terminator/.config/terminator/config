@@ -18,7 +18,7 @@
     foreground_color = "#839496"
     icon_bell = False
     show_titlebar = False
-    font = DejaVu Sans Mono for Powerline 14
+    font = DejaVu Sans Mono for Powerline 12
     background_color = "#002b36"
     scrollback_infinite = True
   [[solarized-light]]

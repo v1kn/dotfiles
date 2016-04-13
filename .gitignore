@@ -35,6 +35,7 @@ vim/.vim/plugged/
 cmus/.cmus/command-history
 cmus/.cmus/search-history
 cmus/.cmus/lib.pl
+cmus/.cmus/playlist.pl
 #cmus/.cmus/cache
 
 ### mpv ###
