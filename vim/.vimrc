@@ -265,6 +265,9 @@ nnoremap <leader>k O<Esc>j
 nnoremap <leader>o o<Esc>k
 nnoremap <leader>l o<Esc>
 
+" invoke bash template
+nnoremap <leader>b :call BashTemplate()<CR>
+
 "-]
 
 "       Clipboard [-
@@ -291,6 +294,7 @@ set pastetoggle=<F6>
 
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
+"-]
 "-]
 
 "       THEMING [-
@@ -325,6 +329,7 @@ set background=dark
 
 " remove trailing white space
 command! Nows :%s/\s\+$//
+"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 command! Showmark :InstantMarkdownPreview
 
 " remove trailing whitespaces and ^M chars
@@ -339,7 +344,18 @@ function! Tailf()
     sleep 1
     call Tailf()
 endfunction
-"-]
+
+" invoke bash template
+function! BashTemplate()
+    :read ~/.vim/templates/bash.cpp
+    set syntax=sh
+    normal gg
+    normal dd
+    normal G
+    normal o
+    normal o
+endfunction
+
 "-]
 
 "       EXPERIMENTAL [-1

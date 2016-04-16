@@ -116,7 +116,8 @@ function __prompt_command()
         fi
 
         # add the result to prompt
-        PS1+=""$White"git\[$Color_On\][$branch]\[$Color_Off\]"
+        #PS1+=""$White"git\[$Color_On\][$branch]\[$Color_Off\]"
+        PS1+="\[$Color_On\][$branch]\[$Color_Off\]"
     fi
 
     # finisher
