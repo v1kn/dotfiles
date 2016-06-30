@@ -160,6 +160,7 @@ set undoreload=10000
 
 " permanent line numbers
 set number
+set relativenumber
 
 " enabling backspace in insert mode
 set backspace=indent,eol,start

@@ -268,6 +268,7 @@ alias t2pdf='pandoc -V fontsize=12pt --latex-engine=xelatex -V mainfont="TakaoMi
 alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
 #alias synapse='Exec=GTK_IM_MODULE='' synapse'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
+alias subs='subdownloader -c -l en --rename-subs -V'
 #-]
 
 #       FUNCTIONS [-
@@ -357,6 +358,12 @@ twitch_aris_best() {
     livestreamer --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle best
 }
 alias arisb=twitch_aris_best
+
+subs-mass() {
+    ext=( -iname \*.mp4 -o -iname \*.avi -o -iname \*.mkv )
+    find . -depth -type f \( "${ext[@]}" \) -print0 | sort -zn |
+    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'subdownloader -c -l en --rename-subs -V "{}"; echo processed "{}"'
+}
 #-]
 
 #       Japanese [-
@@ -486,4 +493,17 @@ untny() {
 }
 
 
+#-]
+
+#       Other [-
+#       -----
+
+# adding all virtual machines to virtualbox at once
+vboxadd() {
+find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox" |
+while read vm
+do
+    VBoxManage registervm "$vm"
+done
+}
 #-]
