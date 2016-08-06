@@ -202,12 +202,12 @@ export HISTIGNORE="ls:ll:history:cd"
 # ubuntu package management
 alias rdeps='apt-cache rdepends'
 alias deps='apt-cache depends'
-alias ins='sudo apt-get install'
+alias ins='sudo apt install'
 alias rmv='sudo apt-get --purge remove'
 alias armv='sudo apt-get --purge autoremove'
-alias ser='apt-cache search'
-alias show='aptitude show'
-alias upd='sudo apt-get update && sudo apt-get dist-upgrade'
+alias ser='apt search'
+alias show='apt show'
+alias upd='sudo apt update && sudo apt full-upgrade'
 
 # trash
 alias trl='trash-list'
@@ -269,6 +269,7 @@ alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
 #alias synapse='Exec=GTK_IM_MODULE='' synapse'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
+alias wfup='sudo nmcli c up id sadzo'
 #-]
 
 #       FUNCTIONS [-
@@ -395,7 +396,7 @@ showheader() {
     done
 }
 showkernel() {
-    dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.2' | awk '{print $2}'
+    dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.4' | awk '{print $2}'
 }
 
 # list all PPAs installed

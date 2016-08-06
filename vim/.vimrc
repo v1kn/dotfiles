@@ -41,7 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-tmuxify'
 Plug 'tpope/vim-unimpaired'
 "Plug 'lervag/vimtex'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 "-]

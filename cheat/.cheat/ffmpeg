@@ -1,0 +1,30 @@
+# Print file metadata etc.
+ffmpeg -i path/to/file.ext
+
+# Convert all m4a files to mp3
+for f in *.m4a; do ffmpeg -i "$f" -acodec libmp3lame -ab 320k "${f%.m4a}.mp3"; done
+
+# Listen to 10 seconds of audio from a video file
+# -ss : start time
+# -t  : seconds to cut
+# -autoexit : closes ffplay as soon as the audio finishes
+#
+ffmpeg -ss 00:34:24.85 -t 10 -i path/to/file.mp4 -f mp3 pipe:play | ffplay -i pipe:play -autoexit
+
+
+# cut out a clip from 30min to 40min of a movie
+# -ss : start timr
+# -t : time to cut
+# -to : end time
+#
+ffmpeg -i inputfile -ss 30:00 -to 40:00 -c copy outfile
+
+
+# convert a 1080p video into 720p
+# -vf scale=-1:720 : sets height to 720 and width will be calculated
+# libx264 : video codec
+# aac : audio codec
+# -crf : quaity. 23 is default, 51 is worst, 0 is lossless
+# -preset : governs quality vs compression, the slower the better
+#
+ffmpeg -i infile -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a copy outfile
