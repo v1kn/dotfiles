@@ -1,0 +1,15 @@
+##
+## SNAPSHOT MANAGEMENT
+##
+
+# list vm snapshots
+VBoxManage snapshot vmname list
+
+# show info on a vm snapshot
+VBoxManage snapshot vmname showvminfo snapname
+
+# create a snapshot
+VBoxManage snapshot vmname take snapname
+
+# delete a snspshot
+VMoxManage snapshot vmname delete snapname

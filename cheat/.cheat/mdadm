@@ -65,3 +65,10 @@ mdadm --remove /dev/md${M} /dev/sd${D}${P}
 
 # check array integrity
 echo check > /sys/devices/virtual/block/md${M}/md/sync_action
+
+# remove a RAID array
+# after these operations, remove the appropriate entry from /etc/mdadm.conf
+umount -l /dev/md${M}
+mdadm --stop /dev/md${M}
+mdadm --zero-superblock /dev/sd${D}
+mdadm --remove /dev/md${M}

@@ -28,3 +28,7 @@ ffmpeg -i inputfile -ss 30:00 -to 40:00 -c copy outfile
 # -preset : governs quality vs compression, the slower the better
 #
 ffmpeg -i infile -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a copy outfile
+
+# forcing ffmpeg to play nicely with while read loops inconverting ape to wav in a batch:
+
+find . -type f -name "*.ape" | while read file; do ffmpeg -i "$file" "${file%ape}wav" -y < /dev/null; done

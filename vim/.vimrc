@@ -148,6 +148,7 @@ set term=xterm-256color
 " folding in vimrc and bash
 autocmd FileType vim,sh setlocal foldmethod=marker
 autocmd FileType vim,sh setlocal foldmarker=[-,-]
+"autocmd FileType md setlocal foldmethod=syntax
 
 " swap, undos and backups
 set backup
@@ -338,12 +339,12 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 
 " testing function for reading logfiles
 function! Tailf()
-    e
-    normal G
-    redraw
-
-    sleep 1
-    call Tailf()
+    while 1
+        e
+        normal G
+        redraw
+        sleep 1
+    endwhile
 endfunction
 
 " invoke bash template
