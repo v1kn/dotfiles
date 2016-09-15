@@ -347,17 +347,17 @@ tvm() {
     livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" $1 medium
 }
 twitchb() {
-    livestreamer --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 best
+    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 best
 }
 twitchm() {
-    livestreamer --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 medium
+    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 medium
 }
 twitch_aris_medium() {
-    livestreamer --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle medium
+    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle medium
 }
 alias arism=twitch_aris_medium
 twitch_aris_best() {
-    livestreamer --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle best
+    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle best
 }
 alias arisb=twitch_aris_best
 

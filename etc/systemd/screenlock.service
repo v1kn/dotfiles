@@ -1,0 +1,17 @@
+# this goes into:
+# /etc/systemd/system/screenlock.service
+
+[Unit]
+Description=Starts i3lock at suspend time
+Before=sleep.target
+
+[Service]
+User=vlkn
+Type=forking
+Environment=DISPLAY=:0
+ExecStartPre=
+ExecStart=$HOME/git-repos/scripts/lock.sh
+
+[Install]
+WantedBy=sleep.target
+WantedBy=suspend.target

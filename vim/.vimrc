@@ -277,12 +277,13 @@ nnoremap <leader>b :call BashTemplate()<CR>
 
 " manipulating clipboard  pastes
 vmap <leader>y "+y
+"vmap <leader>D "+dd
 vmap <leader>d "+d
 vmap <leader>p "+p
 vmap <leader>P "+P
 nmap <leader>p "+p
 nmap <leader>P "+P
-nmap <leader>y "+yy
+"nmap <leader>Y "+yy
 
 " select previously pasted text, or read into the buffer via :r!
 nnoremap gV `[V`]
