@@ -1,10 +1,18 @@
-# if running bash
-if [ -n "$BASH_VERSION" ] && [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
+## === if running bash
+[[ -n "$BASH_VERSION" && -f ~/.bashrc ]] . ~/.bashrc
 
+
+## === adding custom folders to $PATH
 PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+# PATH="$PATH/:$HOME/bin/"
 
+
+# environment variable for qt5 theming in Arch linux
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+
+## === automatic startx on arch
+# [[ -z "$DISPLAY" && "$(fgconsole)" -eq 1 ]] && exec startx
 
 #path_prepend() {
 #    for arg in "$@"; do

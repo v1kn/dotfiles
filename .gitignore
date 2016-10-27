@@ -31,6 +31,11 @@ vim/.vim/plugged/
 ### caches ###
 *cache*
 
+### aconfmgr ###
+aconfmgr/.config/aconfmgr/files/
+aconfmgr/.config/aconfmgr/90-unsorted.log
+
+
 ### cmus ###
 cmus/.cmus/command-history
 cmus/.cmus/search-history

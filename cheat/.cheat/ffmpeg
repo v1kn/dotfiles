@@ -32,3 +32,6 @@ ffmpeg -i infile -vf scale=-1:720 -c:v libx264 -crf 18 -preset veryslow -c:a cop
 # forcing ffmpeg to play nicely with while read loops inconverting ape to wav in a batch:
 
 find . -type f -name "*.ape" | while read file; do ffmpeg -i "$file" "${file%ape}wav" -y < /dev/null; done
+
+# extract subtitles from mkv
+ffmpeg -i infile.mkv -map 0:s:0 subs.srt

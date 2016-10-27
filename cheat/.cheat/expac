@@ -1,0 +1,2 @@
+# show last 20 installed packages
+expac --timefmt='%Y%m%d %T' '%l\t%n' | sort -n | tail -n 20
