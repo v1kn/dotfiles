@@ -258,6 +258,14 @@ alias dot='cd $HOME/git-repos/dotfiles'
 alias cal='cal -3':
 alias dfc='dfc -t -tmpfs'
 
+#twitch
+alias arism='twitchm avoidingthepuddle'
+alias arisb='twitchb avoidingthepuddle'
+alias hobm='twitchm the_happy_hob'
+alias hobb='twitchb the_happy_hob'
+alias distort2m='twitchm distortion2'
+alias distort2b='twitchb distortion2'
+
 # complex
 alias pipes='$HOME/filez/linux/scripts-ref/pipsies.sh -p 2 -f 40 -R -r 5000'
 alias pipesx='$HOME/filez/linux/scripts-ref/pipesx.sh -n 2 -t 0 -t 1 -R -r 5000'
@@ -267,10 +275,10 @@ alias caps='setxkbmap -option ctrl:nocaps'
 alias md2pdf='pandoc -V fontsize=12pt --latex-engine=xelatex -V mainfont="TakaoMincho" -f markdown_github+fenced_code_attributes+pandoc_title_block+footnotes -S --toc'
 alias md2html='pandoc -f markdown_github+fenced_code_attributes+pandoc_title_block+footnotes+shortcut_reference_links -s -S --toc -c ~/.pandoc/css/pandoc.css'
 alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
-#alias synapse='Exec=GTK_IM_MODULE='' synapse'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
+alias tvb='mpv --ytdl-format=22 $1'
 #-]
 
 #       FUNCTIONS [-
@@ -289,6 +297,7 @@ checkpicflac() {
     done
 }
 
+
 # add a YEAR tag to flacs in all subdirectories
 addyearflac() {
     find . -depth -type f -name "*.flac" |
@@ -298,6 +307,7 @@ addyearflac() {
         metaflac --set-tag="YEAR=$year" "$track"
     done
 }
+
 
 # check whether flacs in subdirectores have a YEAR tag
 checkyearflac() {
@@ -309,11 +319,13 @@ checkyearflac() {
     done
 }
 
+
 # playing current dir files with mpv playlist
 PlayCurrentDir() {
     mpv --no-video --playlist <(find "$PWD" -type f -follow | sort)
 }
 alias pcd='PlayCurrentDir'
+
 
 # multi-folder spectrograms
 spectro_flac() {
@@ -329,37 +341,40 @@ spectro_mass() {
 }
 alias spc='spectro_mass'
 alias spcf='spectro_flac'
-# play only audio from videos on the internet
-novid_sound() {
-    livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --no-video --cache 10240" $1
-}
-alias snd=novid_sound
+
+
 #-]
 
 #       Video [-
 #       -----
 
 # using livestreamer and mpv to play videos off of internet
-tvb() {
-    livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" $1 best
-}
-tvm() {
-    livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" $1 medium
-}
+# deprecated. use mpv. leaving one function for historical purposes
+#tvb() {
+#    livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" $1 best
+#}
 twitchb() {
-    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 best
+    livestreamer \
+        --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 \
+        --retry-open 8000 \
+        --retry-streams 10 \
+        --player-continuous-http \
+        --player-passthrough hls \
+        --hls-segment-threads 3 \
+        --player "mpv" \
+        https://twitch.tv/$1 best
 }
 twitchm() {
-    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/$1 medium
+    livestreamer \
+        --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 \
+        --retry-open 8000 \
+        --retry-streams 10 \
+        --player-continuous-http \
+        --player-passthrough hls \
+        --hls-segment-threads 3 \
+        --player "mpv" \
+        https://twitch.tv/$1 medium
 }
-twitch_aris_medium() {
-    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle medium
-}
-alias arism=twitch_aris_medium
-twitch_aris_best() {
-    livestreamer --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 --retry-open 8000 --retry-streams 10 --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" https://twitch.tv/avoidingthepuddle best
-}
-alias arisb=twitch_aris_best
 
 subs-mass() {
     ext=( -iname \*.mp4 -o -iname \*.avi -o -iname \*.mkv )
@@ -464,15 +479,6 @@ CountLines_NoNewline_NoHashComment() {
 }
 alias clin='CountLines_NoNewline'
 alias clinc='CountLines_NoNewline_NoHashComment'
-
-# scroll a file from the commandline
-scroll() {
-    while read -r
-    do
-        echo $REPLY
-        sleep ${1:-0.5}
-    done
-}
 #-]
 
 #       Web APIs [-
