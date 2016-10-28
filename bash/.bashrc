@@ -55,83 +55,68 @@ fi
 #5 blink
 #7 inverse
 
-Color_Off="\[\033[0m\]"
-Red="\[\033[0;31m\]"
-Green="\[\033[0;32m\]"
-Yellow="\[\033[0;33m\]"
-Blue="\[\033[0;34m\]"
-Purple="\[\033[0;35m\]"
-Cyan="\[\033[0;36m\]"
-White="\[\033[0;37m\]"
-BRed="\[\033[1;31m\]"
-BPurple="\[\033[1;35m\]"
+Color_Off="\033[0m"
+Red="\033[0;31m"
+Green="\033[0;32m"
+Yellow="\033[0;33m"
+Blue="\033[0;34m"
+Purple="\033[0;35m"
+Cyan="\033[0;36m"
+White="\033[0;37m"
+BRed="\033[1;31m"
+BPurple="\033[1;35m"
 
 #-]
 
 eval "`dircolors -b`"
 #PROMPT_DIRTRIM=3
 
-function __prompt_command()
+git_color()
 {
-    # starter
-    PS1=""
+  local git_status="$(git status 2> /dev/null)"
 
-    # SSH, client IP
-    if [ -n "$SSH_CLIENT" ]
-    then
-        PS1+="\[$Yellow\]("${$SSH_CLIENT%% *}")\[$Color_Off\]"
-    fi
-
-    # basic info: bash + path
-    #PS1+="["$Green"bash$Color_Off]:"
-    PS1+="[$BPurple\w$Color_Off]"
-
-    # check if inside git repo
-    local git_status="`git status -unormal 2>&1`"
-    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]
-    then
-        # parse the porcelain output of git status
-        if [[ "$git_status" =~ nothing\ to\ commit ]]
-        then
-            local Color_On=$Green
-        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]
-        then
-            local Color_On=$Purple
-        elif [[ "$git_status" =~ Changes\ not\ staged\ for\ commit ]]
-        then
-            local Color_On=$BRed
-        elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]
-        then
-            local Color_On=$Yellow
-        else
-            local Color_On=$BRed
-        fi
-
-        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]
-        then
-            branch=${BASH_REMATCH[1]}
-        else
-            # Detached HEAD. (branch=HEAD is a faster alternative.)
-            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null || echo HEAD`)"
-        fi
-
-        # add the result to prompt
-        #PS1+=""$White"git\[$Color_On\][$branch]\[$Color_Off\]"
-        PS1+="\[$Color_On\][$branch]\[$Color_Off\]"
-    fi
-
-    # finisher
-    PS1+="\n["$Green"bash$Color_Off]"
-    PS1+=" \$ "
+  #if [[ ! $git_status =~ "working directory clean" ]]; then
+  if [[ $git_status =~ "Changes not staged for commit" ]]; then
+    echo -e $Red
+  elif [[ $git_status =~ "Changes to be committed" ]]; then
+    echo -e $Yellow
+  elif [[ $git_status =~ "nothing to commit" ]]; then
+    echo -e $Green
+  elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+    echo -e $Purple
+  else
+    echo -e $Red
+  fi
 }
-PROMPT_COMMAND=__prompt_command
 
-#PS1=""
-#PS1+="["$Green"bash$Color_Off]:"
-#PS1+="[$BPurple\w$Color_Off]>"
-#PS1+="\$ "
+git_branch()
+{
+  local git_status="$(git status 2> /dev/null)"
+  local on_branch="On branch ([^${IFS}]*)"
+  local on_commit="HEAD detached at ([^${IFS}]*)"
 
-#PS1='[bash]:[\w]>\$ '
+  if [[ $git_status =~ $on_branch ]]; then
+    local branch=${BASH_REMATCH[1]}
+    echo "[$branch]"
+  elif [[ $git_status =~ $on_commit ]]; then
+    local commit=${BASH_REMATCH[1]}
+    echo "($commit)"
+  fi
+}
+
+PS1=""
+
+# SSH, client IP
+if [ -n "$SSH_CLIENT" ]; then
+    PS1+="$Yellow("${SSH_CLIENT%% *}")"$Color_Off""
+fi
+
+PS1+="$BPurple[\w]"          # basename of pwd
+PS1+="\[\$(git_color)\]"        # colors git status
+PS1+="\$(git_branch)"           # prints current branch
+PS1+="\n "$Color_Off"=>> "
+export PS1
+
 #PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
 #-]
 
