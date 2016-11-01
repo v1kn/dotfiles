@@ -1,6 +1,6 @@
 
-#       PREAMBLE [-
-#       ========
+#   PREAMBLE [-
+#   ========
 
 # If not running interactively, don't do anything
 case $- in
@@ -26,34 +26,10 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
-#-]
+# -]
 
-#       CUSTOM BASH PROMPT [-
-#       ==================
-# inspired by: https://github.com/maciakl/.dotfiles/blob/master/.bashrc
-
-#       ANSI COLOR CODES [-
-#       ----------------
-#0 Black
-#1 Red
-#2 Green
-#3 Yellow/Brown
-#4 Blue
-#5 Pink
-#6 Cyan
-#7 White/Gray
-#
-#3_  sets grim    foreground color
-#9_  sets intense foreground color
-#4_  sets grim    background color
-#10_ sets intense background color
-#
-#0 reset all colors
-#1 bold
-#3 italics
-#4 underline
-#5 blink
-#7 inverse
+#   CUSTOM BASH PROMPT [-
+#   ==================
 
 Color_Off="\033[0m"
 Red="\033[0;31m"
@@ -65,11 +41,6 @@ Cyan="\033[0;36m"
 White="\033[0;37m"
 BRed="\033[1;31m"
 BPurple="\033[1;35m"
-
-#-]
-
-eval "`dircolors -b`"
-#PROMPT_DIRTRIM=3
 
 git_color()
 {
@@ -104,25 +75,23 @@ git_branch()
   fi
 }
 
-#PS1=""
-
-# SSH, client IP
-#if [ -n "$SSH_CLIENT" ]; then
-#    PS1+="$Yellow("${SSH_CLIENT%% *}")"$Color_Off""
-#fi
-
-PS1="\[$BPurple\][\w]"          # basename of pwd
+PS1=""
+if [ -n "$SSH_CLIENT" ]; then
+    PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")\[$Color_Off\]"
+fi
+PS1+="\[$BPurple\][\w]"          # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
 PS1+="\n\[$Color_Off\]"
 PS1+=" =>> "
 export PS1
 
-#PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
-#-]
+# legacy backup
+# PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
+# -]
 
-#       GENERAL MODS [-
-#       ============
+#   GENERAL MODS [-
+#   ============
 
 # prevent file overwrite with > redirection ( use >| to force)
 set -o noclobber
@@ -180,20 +149,40 @@ HISTFILESIZE=100000
 # dont record some commands
 export HISTIGNORE="ls:ll:history:cd"
 
-#-]
+# -]
 
-#       ALIASES [-
-#       =======
+#   ALIASES [-
+#   =======
 
-# ubuntu package management
-alias rdeps='apt-cache rdepends'
-alias deps='apt-cache depends'
-alias ins='sudo apt install'
-alias rmv='sudo apt-get --purge remove'
-alias armv='sudo apt-get --purge autoremove'
-alias ser='apt search'
-alias show='apt show'
-alias upd='sudo apt update && sudo apt full-upgrade'
+# package management
+alias upda='sudo pacman -Syu'
+alias updaa='sudo pacman -Syyu'
+alias updo='sudo zypper up'
+alias updu='sudo apt update && sudo apt full-upgrade'
+
+alias insa='sudo pacman -S'
+alias insaa='pacaur -ayu'
+alias inso='sudo zypper in'
+alias insu='sudo apt install'
+
+alias sera='pacman -Ss'
+alias seraa='pacaur -a'
+alias sero='zypper se'
+alias seru='apt search'
+
+alias showa='pacman -Sii'
+alias showu='aptitude show'
+
+alias rmva='sudo pacman -Rns'
+alias rmvaa='sudo pacman -Rns $(pacman -Qqdt)'
+alias rmvo='sudo zypper rm'
+alias rmvu='sudo apt-get --purge remove'
+alias rmvuu='sudo apt-get --purge autoremove'
+
+alias depsa='pactree'
+alias rdepsa='pactree -r'
+alias rdepsu='apt-cache rdepends'
+alias depsu='apt-cache depends'
 
 # trash
 alias trl='trash-list'
@@ -257,18 +246,19 @@ alias pipes='$HOME/filez/linux/scripts-ref/pipsies.sh -p 2 -f 40 -R -r 5000'
 alias pipesx='$HOME/filez/linux/scripts-ref/pipesx.sh -n 2 -t 0 -t 1 -R -r 5000'
 alias flacsplit='shnsplit -f *.cue -t "%n-%t" -o flac *.flac'
 alias pkeys='xmodmap -e "keycode 101 = ISO_Level3_Shift"'
-alias caps='setxkbmap -option ctrl:nocaps'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
 alias tvb='mpv --ytdl-format=22 $1'
-#-]
+alias tvb='mpv --ytdl-format=18 $1'
+alias mpvtb='mpv --script-opts=osc-layout=topbar'
+# -]
 
-#       FUNCTIONS [-
-#       =========
+#   FUNCTIONS [-
+#   =========
 
-#       Audio [-
-#       -----
+#   Audio [-
+#   -----
 
 # check if flacs in subdirectories have album art embedded
 checkpicflac() {
@@ -325,11 +315,10 @@ spectro_mass() {
 alias spc='spectro_mass'
 alias spcf='spectro_flac'
 
+# -]
 
-#-]
-
-#       Video [-
-#       -----
+#   Video [-
+#   -----
 
 # using livestreamer and mpv to play videos off of internet
 # deprecated. use mpv. leaving one function for historical purposes
@@ -364,19 +353,19 @@ subs-mass() {
     find . -depth -type f \( "${ext[@]}" \) -print0 | sort -zn |
     xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'subdownloader -c -l en --rename-subs -V "{}"; echo processed "{}"'
 }
-#-]
+# -]
 
-#       Japanese [-
-#       --------
+#   Japanese [-
+#   --------
 
 # list on'yomi of a kanji, using kanjidic
 dicon() {
     perl -CSAD -e '$r=join q(|),grep /\p{cjk}/,split//,qq(@ARGV)||qx(xclip -o);$r||die qq(nothing given\n);open$f,q(<),qq($ENV{HOME}/.filez/dic/kanjidicx.utf8);while(<$f>){if(/^($r)/){$k=$1;($o)=/\s(\p{kana}+(\s\p{kana}+)*)\s/;print qq($k: $o\n)}}' "$@"
 }
-#-]
+# -]
 
-#       Package management [-
-#       ------------------
+#   Package management [-
+#   ------------------
 
 # removing build dependencies installed with apt-get build-dep
 deprem() {
@@ -417,10 +406,10 @@ checkppa() {
         fi
     done <<< "$ppas"
 }
-#-]
+# -]
 
-#       git stuff [-
-#       ---------
+#   git stuff [-
+#   ---------
 
 # .gitignore file generation
 gi() {
@@ -443,10 +432,10 @@ gfall() {
 gpall() {
     ls | xargs -i{} -n1 -P$(nproc) git -C {} pull
 }
-#-]
+# -]
 
-#       Filesystem [-
-#       ----------
+#   Filesystem [-
+#   ----------
 
 # create directory and cd into it
 mkd() {
@@ -462,10 +451,10 @@ CountLines_NoNewline_NoHashComment() {
 }
 alias clin='CountLines_NoNewline'
 alias clinc='CountLines_NoNewline_NoHashComment'
-#-]
+# -]
 
-#       Web APIs [-
-#       --------
+#   Web [-
+#   ---
 
 # getting geolocation info from google maps api
 geoloc() {
@@ -483,11 +472,22 @@ untny() {
     echo $(wget -qO- http://tny.im/yourls-api.php?action=expand\&format=simple\&shorturl=$1)
 }
 
+getpage() {
+    local wget_options=(
+        --continue                      # -c
+        --timestamping                  # -N
+        --convert-links                 # -k
+        --backup-converted              # -K
+        --adjust-extension              # -E
+        --no-parent                     # -np
+        -P $HOME/Documents/webpages/
+    )
+    wget "${wget_options[@]}" "$@"
+}
+# -]
 
-#-]
-
-#       Other [-
-#       -----
+#   Other [-
+#   -----
 
 # adding all virtual machines to virtualbox at once
 vboxadd() {
@@ -501,7 +501,7 @@ done
 top10() {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
 }
-#-]
+# -]
 
 #       Text [-
 #       ----
@@ -515,14 +515,14 @@ md2html() {
         pandoc_title_block
         shortcut_reference_links
     )
-    local options=(
+    local pandoc_options=(
         -f "${format[*]}"
         -s                                  # produce output with appropriate header and footer
         -S                                  # produce typographically correct output
         --toc                               # table of contents
         -c $HOME/.pandoc/css/pandoc.css     # path to custom css styles
     )
-    pandoc "${options[@]}" "$@"
+    pandoc "${pandoc_options[@]}" "$@"
 }
 
 md2pdf() {
@@ -543,18 +543,4 @@ md2pdf() {
         --toc \
         "$@"
 }
-
-getpage() {
-    wget \
-        --continue \
-        --timestamping \
-        --convert-links \
-        --backup-converted \
-        --adjust-extension \
-        --no-parent \
-        -P $HOME/Documents/webpages/ \
-        "$@"
-}
-
-alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
-#-]
+# -]
