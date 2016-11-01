@@ -104,17 +104,18 @@ git_branch()
   fi
 }
 
-PS1=""
+#PS1=""
 
 # SSH, client IP
-if [ -n "$SSH_CLIENT" ]; then
-    PS1+="$Yellow("${SSH_CLIENT%% *}")"$Color_Off""
-fi
+#if [ -n "$SSH_CLIENT" ]; then
+#    PS1+="$Yellow("${SSH_CLIENT%% *}")"$Color_Off""
+#fi
 
-PS1+="$BPurple[\w]"          # basename of pwd
+PS1="\[$BPurple\][\w]"          # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
-PS1+="\n "$Color_Off"=>> "
+PS1+="\n\[$Color_Off\]"
+PS1+=" =>> "
 export PS1
 
 #PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
@@ -257,9 +258,6 @@ alias pipesx='$HOME/filez/linux/scripts-ref/pipesx.sh -n 2 -t 0 -t 1 -R -r 5000'
 alias flacsplit='shnsplit -f *.cue -t "%n-%t" -o flac *.flac'
 alias pkeys='xmodmap -e "keycode 101 = ISO_Level3_Shift"'
 alias caps='setxkbmap -option ctrl:nocaps'
-alias md2pdf='pandoc -V fontsize=12pt --latex-engine=xelatex -V mainfont="TakaoMincho" -f markdown_github+fenced_code_attributes+pandoc_title_block+footnotes -S --toc'
-alias md2html='pandoc -f markdown_github+fenced_code_attributes+pandoc_title_block+footnotes+shortcut_reference_links -s -S --toc -c ~/.pandoc/css/pandoc.css'
-alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
@@ -503,4 +501,60 @@ done
 top10() {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
 }
+#-]
+
+#       Text [-
+#       ----
+
+md2html() {
+    local IFS=+
+    local format=(
+        markdown_github
+        footnotes
+        fenced_code_attributes
+        pandoc_title_block
+        shortcut_reference_links
+    )
+    local options=(
+        -f "${format[*]}"
+        -s                                  # produce output with appropriate header and footer
+        -S                                  # produce typographically correct output
+        --toc                               # table of contents
+        -c $HOME/.pandoc/css/pandoc.css     # path to custom css styles
+    )
+    pandoc "${options[@]}" "$@"
+}
+
+md2pdf() {
+    local IFS=+
+    local format=(
+        markdown_github
+        footnotes
+        fenced_code_attributes
+        pandoc_title_block
+        shortcut_reference_links
+    )
+    pandoc \
+        -f "${format[*]}" \
+        -V fontsize=12pt \
+        -V mainfont="TakaoMincho" \
+        --latex-engine=xelatex \
+        -S \
+        --toc \
+        "$@"
+}
+
+getpage() {
+    wget \
+        --continue \
+        --timestamping \
+        --convert-links \
+        --backup-converted \
+        --adjust-extension \
+        --no-parent \
+        -P $HOME/Documents/webpages/ \
+        "$@"
+}
+
+alias getpage='wget -cNkKE -np -P $HOME/Documents/webpages/'
 #-]
