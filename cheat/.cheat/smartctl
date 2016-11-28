@@ -1,0 +1,14 @@
+# get general and SMART info on the drive
+sudo smartctl -i /dev/sda
+
+# check the duration of various tests before running
+sudo smartctl -c /dev/sda
+
+# perform short/long test
+sudo smartctl -t <short,long> /dev/sda
+
+# view results
+sudo smartctl -a /dev/sda
+
+# for a foreground priority testing, -C flag must be used
+sudo smartctl -t short -C /dev/sda

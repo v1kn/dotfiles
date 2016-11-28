@@ -12,6 +12,9 @@ esac
 export EDITOR='vim'
 export VISUAL='vim'
 
+# path
+PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+
 # replace Caps with Ctrl
 setxkbmap -option ctrl:nocaps
 
@@ -83,7 +86,8 @@ PS1+="\[$BPurple\][\w]"          # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
 PS1+="\n\[$Color_Off\]"
-PS1+=" =>> "
+#PS1+=" =>> "
+PS1+="\[$Cyan\] =>> \[$Color_Off\]"
 export PS1
 
 # legacy backup
@@ -250,7 +254,7 @@ alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
 alias tvb='mpv --ytdl-format=22 $1'
-alias tvb='mpv --ytdl-format=18 $1'
+alias tvm='mpv --ytdl-format=18 $1'
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
 # -]
 
@@ -501,6 +505,15 @@ done
 top10() {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
 }
+
+snapvm() {
+    VBoxManage list vms | cut -d\" -f2 |
+    while read vm
+    do
+        VBoxManage snapshot "$vm" delete 0
+        VBoxManage snapshot "$vm" take 0
+    done
+}
 # -]
 
 #       Text [-
@@ -517,7 +530,7 @@ md2html() {
     )
     local pandoc_options=(
         -f "${format[*]}"
-        -s                                  # produce output with appropriate header and footer
+        -s                                  # produce output with header and footer
         -S                                  # produce typographically correct output
         --toc                               # table of contents
         -c $HOME/.pandoc/css/pandoc.css     # path to custom css styles

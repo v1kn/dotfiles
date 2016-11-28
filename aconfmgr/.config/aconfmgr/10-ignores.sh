@@ -15,24 +15,25 @@ IgnorePath '/etc/machine-id'
 IgnorePath '/etc/ld.so.cache' # "File containing an ordered list of libraries found in the directories specified in /etc/ld.so.conf
 IgnorePath '/etc/udev/hwdb.bin' # https://www.freedesktop.org/software/systemd/man/hwdb.html
 IgnorePath '/etc/.pwd.lock' # passwd; http://blog.dailystuff.nl/2011/08/the-hunt-for-etc-pwd-lock/
+IgnorePath '/etc/.updated' # systemd-update-done.service
+IgnorePath '/etc/ca-certificates/extracted' # certs
+IgnorePath '/etc/fstab'
 IgnorePath '/etc/group'
 IgnorePath '/etc/group-'
 IgnorePath '/etc/gshadow'
 IgnorePath '/etc/gshadow-'
+IgnorePath '/etc/gtk-2.0/gdk-pixbuf.loaders' # GTK
+IgnorePath '/etc/lvm/cache/.cache' # LVM cache
+IgnorePath '/etc/pacman.d/mirrorlist.pacnew'
+IgnorePath '/etc/pacman.d/gnupg' # pacman keyring
 IgnorePath '/etc/passwd-'
 IgnorePath '/etc/shadow'
 IgnorePath '/etc/shadow-'
 IgnorePath '/etc/ssh/*_key' # SSH Host private keys
 IgnorePath '/etc/ssh/*_key.pub' # SSH Host public keys
-IgnorePath '/etc/lvm/cache/.cache' # LVM cache
-IgnorePath '/etc/xml/catalog' # http://xmlsoft.org/catalog.html
-IgnorePath '/etc/gtk-2.0/gdk-pixbuf.loaders' # GTK
-IgnorePath '/etc/pacman.d/gnupg' # pacman keyring
-IgnorePath '/etc/ca-certificates/extracted' # certs
 IgnorePath '/etc/ssl/certs' # certs Symlinks
-IgnorePath '/etc/.updated' # systemd-update-done.service
 IgnorePath '/etc/texmf'
-IgnorePath '/etc/pacman.d/mirrorlist.pacnew'
+IgnorePath '/etc/xml/catalog' # http://xmlsoft.org/catalog.html
 
 ## /usr/lib
 IgnorePath '/usr/lib/graphviz'
@@ -68,7 +69,5 @@ IgnorePath '/usr/share/texmf-dist'
 # packages
 IgnorePath '/usr/bin/virtualenv'
 IgnorePath '/usr/bin/pacaur'
+IgnorePath '/usr/share/doc/arch-wiki/text/*'
 IgnorePackage --foreign devilspie2
-
-# temporary changes
-IgnorePath '/etc/fstab'

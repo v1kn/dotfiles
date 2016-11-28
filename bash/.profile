@@ -1,9 +1,10 @@
 ## === if running bash
-[[ -n "$BASH_VERSION" && -f ~/.bashrc ]] . ~/.bashrc
-
+if [ -n "$BASH_VERSION" ] && [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
 
 ## === adding custom folders to $PATH
-PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+#PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
 # PATH="$PATH/:$HOME/bin/"
 
 

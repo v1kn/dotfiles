@@ -2,7 +2,7 @@ set font "monospace normal 14"
 set adjust-open "best-fit"
 set window-height 1080
 set window-width 1920
-set first-page-column 2
 set pages-per-row 2
+set first-page-column 1:2
 set page-padding 0
 set recolor-keephue true

@@ -15,3 +15,5 @@ CreateLink /etc/systemd/system/suspend.target.wants/screenlock.service /etc/syst
 CreateLink /etc/systemd/user/default.target.wants/xdg-user-dirs-update.service /usr/lib/systemd/user/xdg-user-dirs-update.service
 CreateLink /etc/systemd/user/sockets.target.wants/pulseaudio.socket /usr/lib/systemd/user/pulseaudio.socket
 CreateLink /etc/systemd/system/multi-user.target.wants/powertop.service /etc/systemd/system/powertop.service
+CreateLink /etc/systemd/system/multi-user.target.wants/ntpd.service /usr/lib/systemd/system/ntpd.service
+

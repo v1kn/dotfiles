@@ -6,6 +6,7 @@ AddPackage android-file-transfer # Android MTP client with minimalistic UI
 AddPackage android-tools # Android platform tools
 AddPackage android-udev # Udev rules to connect Android devices to your linux box
 AddPackage anki # Helps you remember facts (like words/phrases in a foreign language) efficiently
+AddPackage arc-gtk-theme # A flat theme with transparent elements for GTK 3, GTK 2 and Gnome-Shell
 AddPackage arch-wiki-docs # Pages from Arch Wiki optimized for offline browsing
 AddPackage arch-wiki-lite # The wiki without html. 1/9 as big, easily searched and viewable on console.
 AddPackage atool # A script for managing file archives of various types
@@ -38,8 +39,9 @@ AddPackage cuetools # Cue and toc file parsers and utilities
 #AddPackage dcfldd # DCFL (DoD Computer Forensics Lab) dd replacement with hashing
 AddPackage dconf-editor # dconf Editor
 AddPackage ddrescue # GNU data recovery tool
+AddPackage deepin-wallpapers # Deepin Wallpapers
 AddPackage device-mapper # Device mapper userspace library and tools
-AddPackage devilspie # Window matching utility for X
+#AddPackage devilspie # Window matching utility for X
 AddPackage dhcpcd # RFC2131 compliant DHCP client daemon
 AddPackage dialog # A tool to display dialog boxes from shell scripts
 AddPackage diffstat # Display a histogram of diff changes
@@ -156,6 +158,7 @@ AddPackage noto-fonts-cjk # Google Noto CJK fonts
 AddPackage noto-fonts-emoji # Google Noto emoji fonts
 AddPackage nototools # Noto fonts support tools and scripts
 AddPackage ntfs-3g # NTFS filesystem driver and utilities
+AddPackage ntp # Network Time Protocol reference implementation
 AddPackage numix-themes # A flat and light theme with a modern look (GNOME, Openbox, Unity, Xfce)
 AddPackage opusfile # Library for opening, seeking, and decoding .opus files
 AddPackage os-prober # Utility to detect other OSes on a set of drives
@@ -170,6 +173,7 @@ AddPackage pcmciautils # Utilities for inserting and removing PCMCIA cards
 AddPackage perl # A highly capable, feature-rich programming language
 AddPackage playonlinux # GUI for managing Windows programs under linux
 AddPackage pkg-config # A system for managing library compile/link flags
+AddPackage powerline-fonts # patched fonts for powerline
 AddPackage powertop # A tool to diagnose issues with power consumption and power management
 AddPackage procps-ng # Utilities for monitoring your system and its processes
 AddPackage psmisc # Miscellaneous procfs tools
@@ -190,6 +194,8 @@ AddPackage seahorse # GNOME application for managing PGP keys.
 AddPackage sed # GNU stream editor
 AddPackage shadow # Password and account management tool suite with support for shadow files and PAM
 AddPackage sleuthkit # File system and media management forensic analysis tools
+AddPackage smartmontools # Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives
+AddPackage stow # Manage installation of multiple softwares in the same directory tree
 AddPackage sudo # Give certain users the ability to run some commands as root
 AddPackage sysfsutils # System Utilities Based on Sysfs
 AddPackage systemd-sysvcompat # sysvinit compat for systemd
@@ -209,6 +215,7 @@ AddPackage tlp # Linux Advanced Power Management
 AddPackage tmux # A terminal multiplexer
 AddPackage tree # A directory listing program displaying a depth indented list of files
 AddPackage ttf-hanazono # A free Japanese kanji font, which contains about 78,685 characters (and 2 SPACEs) defined in ISO/IEC 10646 standard / the Unicode standard.
+AddPackage uget # GTK+ download manager featuring download classification and HTML import
 AddPackage unrar # The RAR uncompression program
 AddPackage usbutils # USB Device Utilities
 AddPackage util-linux # Miscellaneous system utilities for Linux
@@ -240,6 +247,7 @@ AddPackage xfdesktop # A desktop manager for Xfce
 AddPackage xfwm4 # Xfce window manager
 AddPackage xorg-server # Xorg X server
 AddPackage xorg-server-utils # Transition package depending on xorg server utilities
+AddPackage xorg-xkill # Kill a client by its X resource
 AddPackage xorg-xinit # X.Org initialisation program
 AddPackage xorg-xprop # Property displayer for X
 AddPackage zathura # Minimalistic document viewer

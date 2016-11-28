@@ -27,11 +27,12 @@ CopyFile /etc/ufw/ufw.conf
 CopyFile /etc/ufw/user.rules
 CopyFile /etc/ufw/user6.rules
 CopyFile /etc/vconsole.conf
-
-# font symlinks
-CreateLink /etc/fonts/conf.d/20-unhint-small-dejavu-sans-mono.conf ../conf.avail/20-unhint-small-dejavu-sans-mono.conf
-CreateLink /etc/fonts/conf.d/20-unhint-small-dejavu-sans.conf ../conf.avail/20-unhint-small-dejavu-sans.conf
-CreateLink /etc/fonts/conf.d/20-unhint-small-dejavu-serif.conf ../conf.avail/20-unhint-small-dejavu-serif.conf
-CreateLink /etc/fonts/conf.d/57-dejavu-sans-mono.conf ../conf.avail/57-dejavu-sans-mono.conf
-CreateLink /etc/fonts/conf.d/57-dejavu-sans.conf ../conf.avail/57-dejavu-sans.conf
-CreateLink /etc/fonts/conf.d/57-dejavu-serif.conf ../conf.avail/57-dejavu-serif.conf
+CopyFile /etc/lvm/archive/vd0_00000-548204122.vg 600
+CopyFile /etc/lvm/archive/vd0_00001-957002667.vg 600
+CopyFile /etc/lvm/archive/vd0_00002-1648279256.vg 600
+CopyFile /etc/lvm/archive/vd0_00003-253339775.vg 600
+CopyFile /etc/lvm/backup/vd0 600
+CopyFile /etc/mkinitcpio.conf
+CopyFile /etc/pacman.d/hooks/mirrorlist.hook
+CopyFile /etc/pacman.d/hooks/paccache.hook
+CopyFile /usr/local/bin/cclean 755

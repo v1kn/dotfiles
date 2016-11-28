@@ -1,3 +1,5 @@
+
+
 ## AUR packages
 
 
@@ -7,7 +9,7 @@ AddPackage --foreign backintime # Simple backup system inspired from the Flyback
 #AddPackage --foreign bmenu # Simple system menu for commandline
 AddPackage --foreign breeze-snow-cursor-theme # Breeze Snow cursor theme.
 AddPackage --foreign caffeine-ng # Status bar application able to temporarily inhibit the screensaver and sleep mode.
-AddPackage --foreign cower-git # A simple AUR agent with a pretentious name
+AddPackage --foreign cower # A simple AUR agent with a pretentious name
 #AddPackage --foreign devilspie2 # A window matching utility, allowing the user to perform scripted actions on windows as they are created.
 AddPackage --foreign dmenu-extended # An extension to dmenu for quickly opening files and folders.
 AddPackage --foreign downgrade # Bash script for downgrading one or more packages to a version in your cache or the A.R.M.
@@ -15,7 +17,6 @@ AddPackage --foreign firetools # GUI tools for firejail
 AddPackage --foreign font-manager # A simple font management application for GTK+ Desktop Environments
 AddPackage --foreign fslint # A utility to find and clean various forms of lint on a filesystem
 AddPackage --foreign gnome-twitch # Enjoy Twitch on your GNU/Linux desktop
-AddPackage --foreign gtk-theme-arc # A flat theme with transparent elements for GTK 3, GTK 2 and Gnome-Shell. Official releases only.
 AddPackage --foreign gnome-twitch-mpv # MPV player backend plugin for GNOME Twitch
 AddPackage --foreign kalu # Upgrade notifier w/ AUR support, watched (AUR) packages, news
 AddPackage --foreign lemonbar # A featherweight, lemon-scented, bar based on xcb.
