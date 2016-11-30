@@ -1,6 +1,5 @@
 [global_config]
   borderless = True
-  geometry_hinting = False
   sticky = True
   title_hide_sizetext = True
 [keybindings]
@@ -18,7 +17,6 @@
   [[default]]
     background_color = "#002b36"
     background_darkness = 0.9
-    background_image = None
     background_type = transparent
     cursor_color = "#eee8d5"
     cursor_shape = underline
@@ -33,30 +31,32 @@
     use_system_font = False
   [[base16]]
     background_color = "#181818"
-    background_darkness = 0.9
-    background_image = None
+    background_darkness = 0.8
     background_type = transparent
+    cursor_color = "#d8d8d8"
     cursor_shape = underline
-    font = DejaVu Sans Mono for Powerline 14
+    font = DejaVu Sans Mono for Powerline 11
     foreground_color = "#d8d8d8"
     palette = "#181818:#ab4642:#a1b56c:#f7ca88:#7cafc2:#ba8baf:#86c1b9:#d8d8d8:#585858:#dc9656:#282828:#383838:#b8b8b8:#e8e8e8:#a16946:#f8f8f8"
     scrollback_infinite = True
     show_titlebar = False
     use_system_font = False
   [[gruvbox]]
-    background_darkness = 0.9
-    background_image = None
+    background_darkness = 0.8
     background_type = transparent
+    cursor_color = "#eee8d5"
     cursor_shape = underline
-    font = DejaVu Sans Mono for Powerline 14
+    font = DejaVu Sans Mono for Powerline 11
+    icon_bell = False
+    palette = "#282828:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#af3a03:#928374:#fb4934:#b8bb26:#fabd2f:#83a598:#d3869b:#8ec07c:#fe8019"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
   [[jellybeans]]
     background_darkness = 0.9
-    background_image = None
     background_type = transparent
+    cursor_color = "#aaaaaa"
     cursor_shape = underline
     font = DejaVu Sans Mono for Powerline 14
     scrollback_infinite = True
@@ -65,7 +65,7 @@
   [[solarized-light]]
     background_color = "#fdf6e3"
     background_darkness = 0.9
-    background_image = None
+    cursor_color = "#657b83"
     cursor_shape = underline
     font = DejaVu Sans Mono for Powerline 11
     foreground_color = "#657b83"

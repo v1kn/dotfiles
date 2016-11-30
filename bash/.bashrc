@@ -31,8 +31,8 @@ if ! shopt -oq posix; then
 fi
 # -]
 
-#   CUSTOM BASH PROMPT [-
-#   ==================
+#   PROMPT [-
+#   ======
 
 Color_Off="\033[0m"
 Red="\033[0;31m"
@@ -513,6 +513,15 @@ snapvm() {
         VBoxManage snapshot "$vm" delete 0
         VBoxManage snapshot "$vm" take 0
     done
+}
+
+termcheck() {
+    echo -e "\x1b[38;2;255;100;0mTRUECOLOR\x1b[0m"
+    echo -e "\e[3mitalics\e[23m"
+    echo -e "\e[1mbold\e[0m"
+    echo -e "\e[4munderline\e[0m"
+    echo -e "\e[9mstrikethrough\e[0m"
+    echo -e "\e[31mHello World\e[0m"
 }
 # -]
 

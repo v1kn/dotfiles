@@ -146,7 +146,7 @@ hi WarningMsg             cterm=NONE             ctermbg=234   ctermfg=208
 hi WildMenu               cterm=NONE             ctermbg=116   ctermfg=16
 hi ExtraWhitespace        cterm=NONE             ctermbg=66    ctermfg=fg
 
-hi Comment                cterm=NONE             ctermbg=NONE    ctermfg=59
+hi Comment                cterm=NONE,italic      ctermbg=NONE    ctermfg=59
 hi Boolean                cterm=NONE             ctermbg=NONE    ctermfg=208
 hi String                 cterm=NONE             ctermbg=NONE    ctermfg=101
 hi Identifier             cterm=NONE             ctermbg=NONE    ctermfg=145

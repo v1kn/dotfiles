@@ -1,6 +1,6 @@
 
-"       VIM-PLUG [-
-"       ========
+"   VIM-PLUG [-
+"   ========
 
 set nocompatible
 call plug#begin('~/.vim/plugged')
@@ -31,6 +31,7 @@ Plug 'mbbill/undotree'
 "Plug 'SirVer/utilsnips' | Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+"Plug 'itchyny/lightline.vim'
 "Plug 'FooSoft/vim-argwrap'
 "Plug 'ntpeters/vim-better-whitespace'
 "Plug 'tpope/vim-characterize'
@@ -76,11 +77,70 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 "-]
 
-"       PLUGIN CONFIG [-1
-"       =============
+"   PLUGIN CONFIG [-
+"   =============
 
-"       AIRLINE [-2
-"       -------
+"   Lightline [-
+"   ---------
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive',
+      \   'readonly': 'LightlineReadonly',
+      \   'modified': 'LightlineModified',
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+function! LightlineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  if exists("*fugitive#head")
+    let branch = fugitive#head()
+    return branch !=# '' ? '⭠ '.branch : ''
+  endif
+  return ''
+endfunction
+""-]
+
+"   AIRLINE [-
+"   -------
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 
@@ -93,57 +153,58 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+"let g:airline_left_sep = ''
+let g:airline_left_sep = '|'
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+let g:airline_right_sep = '|'
+"let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.linenr = ''
-"-]2
+""-]
 
-"       CTRLP [-2
-"       -----
+"   CtrlP [-
+"   -----
 let g:ctrlp_show_hidden = 1
-"-]2
+""-]
 
-"       GOYO [-2
-"       ----
+"   Goyo [-
+"   ----
 let g:goyo_linenr = 1
+""-]
 
-"-]2
-
-"       NERDTREE [-
-"       --------
+"   Nerdtree [-
+"   --------
 let NERDTreeShowHidden=1
-"-]
+""-]
 
-"       STARTIFY [-2
-"       --------
+"   Startify [-
+"   --------
 let g:startify_list_order = ['files']
 let g:startify_files_number = 20
 let g:startify_update_oldfiles = 0
 let g:startify_enable_unsafe = 1
 let g:startify_custom_header = []
-"-]2
+""-]
 
-"       SYNTASTIC [-2
-"       ---------
+"   Syntastic [-
+"   ---------
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -164,11 +225,11 @@ let g:startify_custom_header = []
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
-"-]2
-"-]1
+""-]
+"-]
 
-"       BASIC CONFIG [-
-"       ============
+"   BASIC CONFIG [-
+"   ============
 
 filetype plugin indent on
 
@@ -264,14 +325,14 @@ set expandtab
 set clipboard^=unnamedplus
 "-]
 
-"       KEY MAPPINGS [-
-"       ============
+"   KEY MAPPINGS [-
+"   ============
 
 " leader
 let mapleader = "\<Space>"
 
-"       Basic buffer management [-
-"       -----------------------
+"   Basic buffer management [-
+"   -----------------------
 
 " jj in insert mode exits to normal mode
 inoremap jj <ESC>
@@ -300,10 +361,10 @@ nnoremap <leader>l o<Esc>
 " invoke bash template
 nnoremap <leader>b :call BashTemplate()<CR>
 
-"-]
+""-]
 
-"       Clipboard [-
-"       ---------
+"   Clipboard [-
+"   ---------
 
 " manipulating clipboard  pastes
 vmap <leader>y "+y
@@ -320,45 +381,42 @@ nnoremap gV `[V`]
 
 " toggle set paste
 set pastetoggle=<F6>
-"-]
+""-]
 
-"       Plugin mappings [-
-"       ---------------
+"   Plugin mappings [-
+"   ---------------
 
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
-"-]
+""-]
 "-]
 
-"       THEMING [-
-"       =======
+"   THEMING [-
+"   =======
 
 " highlight double white space in markdown
 highlight TrailingSpaces ctermbg=darkgreen guibg=darkgreen
 autocmd ColorScheme * highlight TrailingSpaces ctermbg=darkgreen guibg=darkgreen
 match TrailingSpaces /\s\{2}$/
 
+" linenr and cursorline highlights
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-
 highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
-
 set cursorline
 
-"let g:solarized_termcolors=256
-
-let g:solarized_termtrans=0
-
-set t_Co=256
-
-colorscheme solarized
-
+" Italics in comments (solorscheme has to allow it)
 highlight Comment cterm=italic
 
+"colorscheme related
+"set t_Co=256
+set termguicolors
+let g:solarized_termtrans=0
 set background=dark
+colorscheme solarized8_dark
 "-]
 
-"       COMMANDS AND FUNCTIONS [-
-"       ======================
+"   COMMANDS AND FUNCTIONS [-
+"   ======================
 
 " remove trailing white space
 command! Nows :%s/\s\+$//
@@ -388,11 +446,10 @@ function! BashTemplate()
     normal o
     normal o
 endfunction
-
 "-]
 
-"       EXPERIMENTAL [-1
-"       ============
+"   EXPERIMENTAL [-
+"   ============
 
 " Follow symlinks when opening a file (git + fugitive)
 " NOTE: this happens with directory symlinks anyway (due to Vim's chdir/getcwd
@@ -439,4 +496,4 @@ function! MyFollowSymlink(...)
 "set formatoptions+=t
 "set textwidth=70
 "set wrapmargin=10
-"-]1
+"-]
