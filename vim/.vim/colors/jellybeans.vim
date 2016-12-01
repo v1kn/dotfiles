@@ -47,6 +47,7 @@
 " NECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 
+set termguicolors
 set background=dark
 
 hi clear
@@ -290,7 +291,7 @@ fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   else
     let l:noitalic = join(filter(split(a:attr, ","), "v:val !=? 'italic'"), ",")
     if empty(l:noitalic)
-      let l:noitalic = "none"
+      let l:noitalic = "italic" "chqnged it from none, to have italics in comments
     endif
     exec "hi ".a:group." gui=".a:attr." cterm=".l:noitalic
   endif

@@ -32,6 +32,7 @@ if exists('syntax_on')
   syntax reset
 endif
 
+set termguicolors
 set background=dark
 
 let colors_name = 'apprentice'

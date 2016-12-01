@@ -82,11 +82,10 @@ PS1=""
 if [ -n "$SSH_CLIENT" ]; then
     PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")\[$Color_Off\]"
 fi
-PS1+="\[$BPurple\][\w]"          # basename of pwd
+PS1+="\[$Cyan\][\w]"            # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
 PS1+="\n\[$Color_Off\]"
-#PS1+=" =>> "
 PS1+="\[$Cyan\] =>> \[$Color_Off\]"
 export PS1
 

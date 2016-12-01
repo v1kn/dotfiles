@@ -3,6 +3,7 @@
 " Forked from 'vim-scripts/Sorcerer' by Jeet Sukumaran
 " Based on 'Mustang' by Henrique C. Alves (hcarvalhoalves@gmail.com),
 
+set termguicolors
 set background=dark
 
 hi clear

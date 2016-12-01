@@ -8,6 +8,7 @@ if exists("syntax_on")
 endif
 
 let colors_name = "solarized8_light"
+set termguicolors
 set background=light
 
 if !has('gui_running') && get(g:, 'solarized_termtrans', 0)

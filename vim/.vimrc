@@ -6,7 +6,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 "Plug 'rking/ag.vim'
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
 "Plug 'kien/ctrlp.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 "PLug 'Raimondi/delimitMate'
@@ -331,8 +331,13 @@ set clipboard^=unnamedplus
 " leader
 let mapleader = "\<Space>"
 
-"   Basic buffer management [-
-"   -----------------------
+" colorscheme swapping
+nnoremap <leader>sd :colorscheme solarized8_dark<CR>
+nnoremap <leader>sl :colorscheme solarized8_light<CR>
+nnoremap <leader>gb :colorscheme gruvbox<CR>
+nnoremap <leader>ap :colorscheme apprentice<CR>
+nnoremap <leader>sc :colorscheme sorcerer<CR>
+nnoremap <leader>bd :colorscheme base16-default<CR>
 
 " jj in insert mode exits to normal mode
 inoremap jj <ESC>
@@ -361,34 +366,27 @@ nnoremap <leader>l o<Esc>
 " invoke bash template
 nnoremap <leader>b :call BashTemplate()<CR>
 
-""-]
-
-"   Clipboard [-
-"   ---------
+" syntax highlighting for bash and markdown
+nnoremap <leader>sh :set syntax=sh<CR>
+nnoremap <leader>md :set syntax=markdown<CR>
 
 " manipulating clipboard  pastes
 vmap <leader>y "+y
-"vmap <leader>D "+dd
 vmap <leader>d "+d
 vmap <leader>p "+p
 vmap <leader>P "+P
 nmap <leader>p "+p
 nmap <leader>P "+P
-"nmap <leader>Y "+yy
 
 " select previously pasted text, or read into the buffer via :r!
 nnoremap gV `[V`]
 
 " toggle set paste
 set pastetoggle=<F6>
-""-]
 
-"   Plugin mappings [-
-"   ---------------
-
+" plugin mappings
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
-""-]
 "-]
 
 "   THEMING [-
