@@ -33,8 +33,8 @@ download-path /home/vlkn/Downloads/podbeuter/
 # currently customized for solarized theme under tmux+tmuxinator
 color listnormal cyan default
 color listnormal_unread yellow default
-color listfocus black green dim
-color listfocus_unread white green
+color listfocus red black dim
+color listfocus_unread white black
 color info white black
 color article default default
 #color background   default   default

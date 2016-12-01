@@ -148,7 +148,7 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
@@ -323,6 +323,15 @@ set expandtab
 
 "clipboard settings
 set clipboard^=unnamedplus
+
+if has('gui_running')
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=r
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 11
+    set lines=40 columns=100
+endif
+
 "-]
 
 "   KEY MAPPINGS [-
