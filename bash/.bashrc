@@ -13,7 +13,9 @@ export EDITOR='vim'
 export VISUAL='vim'
 
 # path
-PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+if [[ -z $TMUX ]]; then
+    PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+fi
 
 # replace Caps with Ctrl
 setxkbmap -option ctrl:nocaps

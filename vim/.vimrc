@@ -329,7 +329,7 @@ if has('gui_running')
     set guioptions-=m
     set guioptions-=r
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 11
-    set lines=40 columns=100
+    set lines=50 columns=90
 endif
 
 "-]
