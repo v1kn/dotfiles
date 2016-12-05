@@ -31,7 +31,7 @@
     show_titlebar = False
     use_system_font = False
   [[apprentice]]
-    background_color = "#262626"
+    background_color = "#1c1c1c"
     background_darkness = 0.9
     background_type = transparent
     cursor_color = "#bcbcbc"
@@ -39,18 +39,21 @@
     font = DejaVu Sans Mono for Powerline 11
     foreground_color = "#bcbcbc"
     icon_bell = False
-    palette = "#1c1c1c:#af5f5f:#5f875f:#87875f:#5f87af:#5f5f87:#5f8787:#6c6c6c:#444444:#ff8700:#87af87:#ffffaf:#8fafd7:#8787af:#5fafaf:#ffffff"
+    palette = "#262626:#af5f5f:#5f875f:#87875f:#5f87af:#5f5f87:#5f8787:#6c6c6c:#444444:#ff8700:#87af87:#ffffaf:#8fafd7:#8787af:#5fafaf:#ffffff"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
   [[base16]]
+    background_color = "#181818"
     background_darkness = 0.9
     background_type = transparent
     cursor_color = "#aaaaaa"
     cursor_shape = underline
     font = DejaVu Sans Mono for Powerline 11
+    foreground_color = "#d8d8d8"
     icon_bell = False
+    palette = "#181818:#ab4642:#a1b56c:#f7ca88:#7cafc2:#ba8baf:#86c1b9:#d8d8d8:#585858:#dc9656:#282828:#383838:#b8b8b8:#e8e8e8:#a16946:#f8f8f8"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
@@ -79,6 +82,20 @@
     foreground_color = "#3c3836"
     icon_bell = False
     palette = "#fdf4c1:#cc241d:#98971a:#d79221:#458588:#b16286:#689d6a:#7c6f64:#928374:#9d0006:#79740e:#b57614:#076678:#8f3f71:#427b58:#3c3836"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
+  [[hybrid]]
+    background_color = "#1d1f21"
+    background_darkness = 0.9
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    cursor_shape = underline
+    font = DejaVu Sans Mono for Powerline 11
+    foreground_color = "#c5c8c6"
+    icon_bell = False
+    palette = "#282a2e:#a54242:#8c9440:#de935f:#5f819d:#85678f:#5e8d87:#707880:#373b41:#cc6666:#b5bd68:#f0c674:#81a2be:#b294bb:#8abeb7:#c5c8c6"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False

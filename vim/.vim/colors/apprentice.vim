@@ -2,6 +2,7 @@
 " Maintainer:   Romain Lafourcade (romainlafourcade@gmail.com)
 " Essentially a streamlining and conversion to X11 colors of
 " 'sorcerer' by Jeet Sukumaran (jeetsukumaran@gmailcom)
+" modified bg and comment colors (v1kn, 161205)
 
 " MADE-UP NAME    HEX        XTERM  ANSI
 " ==================================================
@@ -38,11 +39,14 @@ set background=dark
 let colors_name = 'apprentice'
 
 if &t_Co >= 256 || has('gui_running')
-  hi Normal           ctermbg=235  ctermfg=250  guibg=#262626 guifg=#bcbcbc cterm=NONE           gui=NONE
+  "hi Normal           ctermbg=235  ctermfg=250  guibg=#262626 guifg=#bcbcbc cterm=NONE           gui=NONE
+  hi Normal           ctermbg=235  ctermfg=250  guibg=#1c1c1c guifg=#bcbcbc cterm=NONE           gui=NONE
 
   set background=dark
 
   hi Comment          ctermbg=NONE ctermfg=240  guibg=NONE    guifg=#585858 cterm=NONE,italic    gui=NONE,italic
+  " comment fg from sorcerer
+  " hi Comment          ctermbg=NONE ctermfg=240  guibg=NONE    guifg=#686858 cterm=NONE,italic    gui=NONE,italic
   hi Constant         ctermbg=NONE ctermfg=208  guibg=NONE    guifg=#ff8700 cterm=NONE           gui=NONE
   hi Error            ctermbg=NONE ctermfg=131  guibg=NONE    guifg=#af5f5f cterm=reverse        gui=reverse
   hi Identifier       ctermbg=NONE ctermfg=67   guibg=NONE    guifg=#5f87af cterm=NONE           gui=NONE

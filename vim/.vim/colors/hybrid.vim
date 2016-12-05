@@ -3,6 +3,7 @@
 " URL:        https://github.com/w0ng/vim-hybrid
 " Modified:   27 Jan 2013 07:33 AM AEST
 " License:    MIT
+" Modified for including italics; vlkn 161205,lnr345
 
 " Description:"{{{
 " ----------------------------------------------------------------------------
@@ -341,7 +342,7 @@ exe "hi! Normal"        .s:fg_foreground  .s:bg_normal      .s:fmt_none
 "}}}
 " Generic Syntax Highlighting: (see :help group-name)"{{{
 " ----------------------------------------------------------------------------
-exe "hi! Comment"         .s:fg_comment     .s:bg_none        .s:fmt_none
+exe "hi! Comment"         .s:fg_comment     .s:bg_none        .s:fmt_ital
 
 exe "hi! Constant"        .s:fg_red         .s:bg_none        .s:fmt_none
 exe "hi! String"          .s:fg_green       .s:bg_none        .s:fmt_none
