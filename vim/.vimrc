@@ -45,7 +45,7 @@ Plug 'terryma/vim-expand-region'
 "Plug 'tpope/vim-flagship'
 Plug 'tpope/vim-fugitive'
 "Plug 'lervag/vimtex'
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 "Plug 'fatih/vim-go'
 "Plug 'henrik/vim-indexed-search'
 "Plug 'suan/vim-instant-markdown'
@@ -182,6 +182,12 @@ let g:airline_symbols.linenr = ''
 "   CtrlP [-
 "   -----
 let g:ctrlp_show_hidden = 1
+""-]
+
+"   Gitgutter [-
+
+"let g:gitgutter_map_keys = 0
+
 ""-]
 
 "   Goyo [-
@@ -347,6 +353,9 @@ nnoremap <leader>gb :colorscheme gruvbox<CR>
 nnoremap <leader>ap :colorscheme apprentice<CR>
 nnoremap <leader>sc :colorscheme sorcerer<CR>
 nnoremap <leader>bd :colorscheme base16-default<CR>
+nnoremap <leader>hb :colorscheme hybrid<CR>
+nnoremap <leader>bgd :set background=dark<CR>
+nnoremap <leader>bgl :set background=light<CR>
 
 " jj in insert mode exits to normal mode
 inoremap jj <ESC>

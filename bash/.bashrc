@@ -402,7 +402,6 @@ listppa() {
 checkppa() {
     dist=$(lsb_release -sc)
     ppas=$(grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u)
-    #ppas=$(cat /pathto/ppafile)
     while read -r ppa; do
         url="http://ppa.launchpad.net/$ppa/ubuntu/dists/$dist/"
         if [[ $(wget -O /dev/null "$url" 2>&1|grep "200 OK"|wc -l) == "0" ]]
