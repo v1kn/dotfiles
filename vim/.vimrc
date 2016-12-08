@@ -5,20 +5,32 @@
 set nocompatible
 call plug#begin('~/.vim/plugged')
 
+Plug 'wincent/ferret'
+Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'mbbill/undotree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'plasticboy/vim-markdown'
+Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-tmuxify'
+Plug 'tpope/vim-unimpaired'
 "Plug 'rking/ag.vim'
 "Plug 'chriskempson/base16-vim'
 "Plug 'kien/ctrlp.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 "PLug 'Raimondi/delimitMate'
 "Plug 'Konfekt/FastFold'
-Plug 'wincent/ferret'
-Plug 'junegunn/goyo.vim'
 "Plug 'haya14busa/incsearch.vim'
 "Plug 'itchyny/lightline.vim
 "PLug 'Shougo/neocomplete.vim'
-Plug 'scrooloose/nerdtree'
 "Plug 'chrisbra/NrrwRgn'
-Plug 'francoiscabrol/ranger.vim'
 "Plug 'rbgrouleff/bclose.vim' | Plug 'francoiscabrol/ranger.vim' (for nvim)
 "Plug 'tweekmonster/spellrotate.vim'
 "PLug AndrewRadev/splitjoin'
@@ -26,11 +38,7 @@ Plug 'francoiscabrol/ranger.vim'
 "Plug 'scrooloose/syntastic'
 "Plug 'godlygeek/tabular'
 "Plug 'airblade/targets.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'mbbill/undotree'
 "Plug 'SirVer/utilsnips' | Plug 'honza/vim-snippets'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 "Plug 'itchyny/lightline.vim'
 "Plug 'FooSoft/vim-argwrap'
 "Plug 'ntpeters/vim-better-whitespace'
@@ -41,16 +49,12 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'junegunn/vim-easy-align'
 "Plug 'svermeulen/vim-easyclip'
 "Plug 'tommcdo/vim-exchange'
-Plug 'terryma/vim-expand-region'
 "Plug 'tpope/vim-flagship'
-Plug 'tpope/vim-fugitive'
 "Plug 'lervag/vimtex'
-Plug 'airblade/vim-gitgutter'
 "Plug 'fatih/vim-go'
 "Plug 'henrik/vim-indexed-search'
 "Plug 'suan/vim-instant-markdown'
 "Plug 'xuhdev/vim-latex-live-preview'
-Plug 'plasticboy/vim-markdown'
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'tpope/vim-obsession'
 "Plug 'vim-pandoc/vim-pandoc'
@@ -61,16 +65,12 @@ Plug 'plasticboy/vim-markdown'
 "Plug 'mhinz/vim-sayonara'
 "Plug 'tpope/vim-sensible'
 "Plug 'justinmk/vim-sneak'
-Plug 'mhinz/vim-startify'
-Plug 'tpope/vim-surround'
 "Plug 'kana/vim-textobj-user'
 "Plug 'kana/vim-textobj-line'
 "Plug 'kana/vim-textobj-indent'
 "Plug 'kana/vim-textobj-entire'
 "Plug 'kana/vim-textobj-syntax'
 "Plug 'tpope/vim-tbone'
-Plug 'mhinz/vim-tmuxify'
-Plug 'tpope/vim-unimpaired'
 "Plug 'nelstrom/vim-visual-star-search'
 "Plug 'maxbrunsfeld/vim-yankstack'
 
@@ -148,7 +148,8 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
@@ -239,15 +240,12 @@ let g:startify_custom_header = []
 
 filetype plugin indent on
 
-" set $TERM to xterm256
-set term=xterm-256color
-
 " folding in vimrc and bash
 autocmd FileType vim,sh setlocal foldmethod=marker
 autocmd FileType vim,sh setlocal foldmarker=[-,-]
 "autocmd FileType md setlocal foldmethod=syntax
 
-" swap, undos and backups
+" swap, undos and backups, viminfo
 set backup
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
@@ -255,6 +253,7 @@ set undofile
 set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
+set viminfo+=n~/.vim/viminfo
 
 " permanent line numbers
 set number
@@ -423,8 +422,11 @@ set cursorline
 " Italics in comments (solorscheme has to allow it)
 highlight Comment cterm=italic
 
-"colorscheme related
-"set t_Co=256
+" set $TERM to xterm256
+" set term=xterm-256color
+"
+" colorscheme related
+" set t_Co=256
 set termguicolors
 let g:solarized_termtrans=0
 set background=dark

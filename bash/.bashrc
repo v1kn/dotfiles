@@ -8,13 +8,14 @@ case $- in
       *) return;;
 esac
 
-# VIM
+# export variables
 export EDITOR='vim'
 export VISUAL='vim'
+export GEM_PATH=$HOME/.local/gem
 
 # path
 if [[ -z $TMUX ]]; then
-    PATH="$PATH:$HOME/.local/pyvenv/bin:$HOME/.gem/ruby/2.3.0/bin"
+    PATH="$PATH:$HOME/.local/bin"
 fi
 
 # replace Caps with Ctrl
@@ -229,14 +230,16 @@ alias tmux='TERM=xterm-256color /usr/bin/tmux'
 alias stw='stow  -t /home/vlkn/ -vv'
 alias ranger='TERM=xterm-256color /usr/local/bin/ranger'
 alias rr='TERM=xterm-256color /usr/local/bin/ranger'
-alias vd='/usr/bin/vd'
 alias todaydate='date +%Y%m%d'
 alias emacs='echo "lol, nice try"; sleep .5; vim'
 alias cm='cmatrix -C yellow -u 9'
 alias mpvnov='mpv --no-video'
-alias dot='cd $HOME/git-repos/dotfiles'
+alias dot='cd $HOME/grepo/dotfiles'
+alias dua='cd $HOME/grepo/DUApost'
+alias bin='cd $HOME/grepo/bin'
 alias cal='cal -3':
 alias dfc='dfc -t -tmpfs'
+alias netres='sudo systemctl restart NetworkManager'
 
 #twitch
 alias arism='twitchm avoidingthepuddle'
@@ -422,10 +425,10 @@ gi() {
 
 # create git repo folder with basic files inside
 mkrep() {
-    mkdir -p $HOME/git-repos/"$@"
-    cd $HOME/git-repos/"$1"
+    mkdir -p $HOME/grepo/"$@"
+    cd $HOME/grepo/"$1"
     touch README.md
-    cp $HOME/git-repos/dotfiles/LICENSE.md .
+    cp $HOME/grepo/dotfiles/LICENSE.md .
     gi linux,vim > .gitignore
 }
 # git fetch for multiple repos

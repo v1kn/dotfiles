@@ -22,7 +22,7 @@ Session.vim
 *~
 # auto-generated tag files
 tags
-vim/.viminfo
+vim/.vim/viminfo
 vim/.vim/undo/
 vim/.vim/swap/
 vim/.vim/backup/

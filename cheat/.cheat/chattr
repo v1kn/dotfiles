@@ -1,0 +1,10 @@
+#==========
+#   - chattr changes files and folder attributes
+#   - <+> symbol adds or turns on an attribute, <-> turns it off
+#==========
+
+# make target (file or folder) immutable (no rename, modify, delete)
+sudo chattr +i <target>
+
+# make targets immutable recursively
+sudo chattr -R +i <target>

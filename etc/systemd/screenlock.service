@@ -10,7 +10,7 @@ User=vlkn
 Type=forking
 Environment=DISPLAY=:0
 ExecStartPre=
-ExecStart=$HOME/git-repos/scripts/lock.sh
+ExecStart=$HOME/grepo/bin/lock.sh
 
 [Install]
 WantedBy=sleep.target
