@@ -35,14 +35,6 @@ vim/.vim/plugged/
 aconfmgr/.config/aconfmgr/files/
 aconfmgr/.config/aconfmgr/90-unsorted.log
 
-
-### cmus ###
-#cmus/.cmus/command-history
-#cmus/.cmus/search-history
-#cmus/.cmus/lib.pl
-#cmus/.cmus/playlist.pl
-#cmus/.cmus/cache
-
 ### mpv ###
 mpv/.config/mpv/watch_later/
 

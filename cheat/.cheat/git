@@ -114,3 +114,6 @@ curl -u 'v1kn' https://api.github.com/user/repos -d '{"name":"REPONAME"}'
 git reset --soft HEAD~
 git add <files>
 git commit -c ORIG_HEAD
+
+# remove a folder that was previously added, using `.gitignore`
+git rm -r --cached <folder>
