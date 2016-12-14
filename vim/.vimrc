@@ -232,6 +232,12 @@ let g:startify_custom_header = []
 "highlight link SyntasticWarningSign SignColumn
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
+ ""-]
+
+"   Vim-instant-markdown [-
+"   --------------------
+
+"let g:instant_markdown_autostart = 0
 ""-]
 "-]
 
@@ -404,6 +410,7 @@ set pastetoggle=<F6>
 " plugin mappings
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
+"nnoremap <leader>mds :InstantMarkdownPreview<CR>
 "-]
 
 "   THEMING [-

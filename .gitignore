@@ -37,10 +37,10 @@ aconfmgr/.config/aconfmgr/90-unsorted.log
 
 
 ### cmus ###
-cmus/.cmus/command-history
-cmus/.cmus/search-history
-cmus/.cmus/lib.pl
-cmus/.cmus/playlist.pl
+#cmus/.cmus/command-history
+#cmus/.cmus/search-history
+#cmus/.cmus/lib.pl
+#cmus/.cmus/playlist.pl
 #cmus/.cmus/cache
 
 ### mpv ###
@@ -66,6 +66,7 @@ zathura/.local/
 ### whole apps ###
 atom/
 clementine/
+cmus/
 fonts-icons-themes/
 neovim/
 rtv/

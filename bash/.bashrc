@@ -12,6 +12,7 @@ esac
 export EDITOR='vim'
 export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
+export CARGO_HOME=$HOME/.local/cargo
 
 # path
 if [[ -z $TMUX ]]; then
