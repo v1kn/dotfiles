@@ -356,7 +356,6 @@ nnoremap <leader>sd :colorscheme solarized8_dark<CR>
 nnoremap <leader>sl :colorscheme solarized8_light<CR>
 nnoremap <leader>gb :colorscheme gruvbox<CR>
 nnoremap <leader>ap :colorscheme apprentice<CR>
-nnoremap <leader>sc :colorscheme sorcerer<CR>
 nnoremap <leader>bd :colorscheme base16-default<CR>
 nnoremap <leader>hb :colorscheme hybrid<CR>
 nnoremap <leader>bgd :set background=dark<CR>
@@ -392,6 +391,9 @@ nnoremap <leader>b :call BashTemplate()<CR>
 " syntax highlighting for bash and markdown
 nnoremap <leader>sh :set syntax=sh<CR>
 nnoremap <leader>md :set syntax=markdown<CR>
+
+" rust
+au BufNewFile,BufRead *.rs set filetype=rust
 
 " manipulating clipboard  pastes
 vmap <leader>y "+y

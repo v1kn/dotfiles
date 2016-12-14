@@ -28,12 +28,17 @@ vim/.vim/swap/
 vim/.vim/backup/
 vim/.vim/plugged/
 
-### caches ###
+## caches
 *cache*
 
-### aconfmgr ###
+## aconfmgr
 aconfmgr/.config/aconfmgr/files/
 aconfmgr/.config/aconfmgr/90-unsorted.log
+
+## cmus
+cmus/.config/cmus/*
+!cmus/.config/cmus/rc
+
 
 ### mpv ###
 mpv/.config/mpv/watch_later/
@@ -58,7 +63,6 @@ zathura/.local/
 ### whole apps ###
 atom/
 clementine/
-cmus/
 fonts-icons-themes/
 neovim/
 rtv/
