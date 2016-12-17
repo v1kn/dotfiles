@@ -86,9 +86,10 @@ PS1=""
 if [ -n "$SSH_CLIENT" ]; then
     PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")\[$Color_Off\]"
 fi
-PS1+="\[$Cyan\][\w]"            # basename of pwd
+PS1+="\[$Yellow\][\u@\h]"
+PS1+="\[$Cyan\] [\w]"            # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
-PS1+="\$(git_branch)"           # prints current branch
+PS1+=" \$(git_branch)"           # prints current branch
 PS1+="\n\[$Color_Off\]"
 PS1+="\[$Cyan\] =>> \[$Color_Off\]"
 export PS1
@@ -498,7 +499,7 @@ getpage() {
 #   -----
 
 # adding all virtual machines to virtualbox at once
-vboxadd() {
+vbox_add() {
 find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox" |
 while read vm
 do
@@ -510,7 +511,7 @@ top10() {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
 }
 
-snapvm() {
+vbox_snapvm() {
     VBoxManage list vms | cut -d\" -f2 |
     while read vm
     do
