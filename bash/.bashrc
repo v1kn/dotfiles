@@ -200,7 +200,7 @@ alias trrs='restore-trash'
 alias trp='trash-put'
 
 # colors
-alias ls='ls --color=auto -h --group-directories-first'
+alias ls='ls --color=auto -h --group-directories-first -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -405,7 +405,7 @@ listppa() {
 
 # check if PPAs are compatible with this ubuntu version
 checkppa() {
-    dist=$(lsb_release -sc)
+    dist=$1
     ppas=$(grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u)
     while read -r ppa; do
         url="http://ppa.launchpad.net/$ppa/ubuntu/dists/$dist/"
