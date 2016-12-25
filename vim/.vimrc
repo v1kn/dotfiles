@@ -311,9 +311,12 @@ set confirm
 " hide buffers, not close them
 set hidden
 
-" show invisible chars as a $ sign
+" wrapping
 set wrap
 set linebreak
+set textwidth=80
+set colorcolumn=80
+"set formatoptions+=t
 "set nolist
 "set listchars="eol:$,tab"
 
@@ -420,11 +423,13 @@ nnoremap <leader>gs :Gstatus<CR>
 
 " highlight double white space in markdown
 highlight TrailingSpaces ctermbg=darkgreen guibg=darkgreen
-autocmd ColorScheme * highlight TrailingSpaces ctermbg=darkgreen guibg=darkgreen
+autocmd ColorScheme * highlight TrailingSpaces
+    \ ctermbg=darkgreen guibg=darkgreen
 match TrailingSpaces /\s\{2}$/
 
 " linenr and cursorline highlights
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
+    \ gui=NONE guifg=DarkGrey guibg=NONE
 highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 set cursorline
 
@@ -451,7 +456,9 @@ command! Nows :%s/\s\+$//
 command! Showmark :InstantMarkdownPreview
 
 " remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml
+    \ autocmd BufWritePre <buffer> :call
+    \ setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " testing function for reading logfiles
 function! Tailf()
@@ -513,14 +520,13 @@ function! MyFollowSymlink(...)
    endif
  endfunction
  command! FollowSymlink call MyFollowSymlink()
- command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
+ command! ToggleFollowSymlink let w:no_resolve_symlink =
+    \ !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>"
+    \ w:no_resolve_symlink
  au BufReadPost * nested call MyFollowSymlink(expand('%'))
 
 " better external text formatter
 "set formatprg=par\ -w70
 
-" wrapping
-"set formatoptions+=t
-"set textwidth=70
-"set wrapmargin=10
 "-]
+

@@ -60,7 +60,7 @@ git_color()
     echo -e $Yellow
   elif [[ $git_status =~ "nothing to commit" ]]; then
     echo -e $Green
-  elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+  elif [[ $git_status =~ "untracked files present" ]]; then
     echo -e $Purple
   else
     echo -e $Red
@@ -239,6 +239,7 @@ alias mpvnov='mpv --no-video'
 alias dot='cd $HOME/grepo/dotfiles'
 alias dua='cd $HOME/grepo/DUApost'
 alias bin='cd $HOME/grepo/bin'
+alias io='cd $HOME/grep/vlkn.github.io'
 alias cal='cal -3':
 alias dfc='dfc -t -tmpfs'
 alias netres='sudo systemctl restart NetworkManager'
@@ -539,15 +540,15 @@ md2html() {
         markdown_github
         footnotes
         fenced_code_attributes
-        pandoc_title_block
+        yaml_metadata_block
         shortcut_reference_links
     )
     local pandoc_options=(
         -f "${format[*]}"
-        -s                                  # produce output with header and footer
-        -S                                  # produce typographically correct output
+        --standalone                        # -s produce output with header and footer
+        --smart                             # -S produce typographically correct output
         --toc                               # table of contents
-        -c $HOME/.pandoc/css/pandoc.css     # path to custom css styles
+        -c $HOME/.pandoc/css/jekyll.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
 }
@@ -558,7 +559,7 @@ md2pdf() {
         markdown_github
         footnotes
         fenced_code_attributes
-        pandoc_title_block
+        yaml_metadata_block
         shortcut_reference_links
     )
     pandoc \
