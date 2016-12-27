@@ -39,7 +39,6 @@ Plug 'tpope/vim-unimpaired'
 "Plug 'godlygeek/tabular'
 "Plug 'airblade/targets.vim'
 "Plug 'SirVer/utilsnips' | Plug 'honza/vim-snippets'
-"Plug 'itchyny/lightline.vim'
 "Plug 'FooSoft/vim-argwrap'
 "Plug 'ntpeters/vim-better-whitespace'
 "Plug 'tpope/vim-characterize'
@@ -245,12 +244,6 @@ let g:startify_custom_header = []
 "   ============
 
 filetype plugin indent on
-
-" folding in vimrc and bash
-autocmd FileType vim,sh setlocal foldmethod=marker
-autocmd FileType vim,sh setlocal foldmarker=[-,-]
-"autocmd FileType md setlocal foldmethod=syntax
-
 " swap, undos and backups, viminfo
 set backup
 set backupdir=~/.vim/backup//
@@ -260,84 +253,57 @@ set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
 set viminfo+=n~/.vim/viminfo
-
-" permanent line numbers
-set number
-set relativenumber
-
-" enabling backspace in insert mode
-set backspace=indent,eol,start
-
-" set a limit for history of searches and commands
-set history=50
-
-" line position
-set ruler
-
-" command display in lower right corner, enhanced statusbar
-set showcmd
-set cmdheight=2
-set laststatus=2
-
-" distance between working line and last visible line
-set scrolloff=10
-
-" keeps indentation of new lines while indenting
-set breakindent
-
-" display match for search pattern when halwfay typing it
-set incsearch
-
-" syntax and search highlights
-syntax on
-syntax enable
-set hlsearch
-
-" better command line completion
+" lines
+set cursorline
+set number                  " line numbers
+set relativenumber          " relative line numbers
+set ruler                   " line position
+set scrolloff=10            " smallest distance from bottom line
+set breakindent             " keeps indentation of new lines when indenting
+" commands
+set history=50              " set a limit for history of searches and commands
+set showcmd                 " command display in BR corner
+set cmdheight=2             " enhanced statusbar
+set laststatus=2            " enhanced statusbar
 set wildmenu
 set wildmode=longest,list,full
 set wildignorecase
-
-" ignore case while searching
-set ignorecase
-set smartcase
-
-" the /g flag on :s substitutions by default
-set gdefault
-
-" confirming saving changes
-set confirm
-
-" hide buffers, not close them
-set hidden
-
 " wrapping
-set wrap
-set linebreak
-set textwidth=80
-set colorcolumn=80
-"set formatoptions+=t
-"set nolist
-"set listchars="eol:$,tab"
-
-"show matching brackets
-set showmatch
-
-"fighting delay in between modes
-set timeoutlen=1000
-set ttimeoutlen=0
-
-"Ctrl-arrow during visual mode
-set t_ut=
-
-" spaces of 4 instead of tabs
-set shiftwidth=4
-set softtabstop=4
+set wrap                    " non-destructive wrap according to window size
+set linebreak               " break lines on non-words
+set nolist                  " list would turn off linebreak
+set textwidth=80            " wrap to 80 chars, when fo+=t is set
+set colorcolumn=80          " show 80 char mark
+set formatoptions=cqmM      " turn off automatic wrapping, enable multibyte
+                                " searching
+set hlsearch                " search highlight
+set incsearch               " display match for pattern when halfway typing it
+set ignorecase              " ignore case while searching
+set smartcase               " ignore case while searching
+" syntax
+syntax on
+syntax enable
+" modes
+set timeoutlen=1000         " fix delay in switching between modes
+set ttimeoutlen=0           " fix delay in switching between modes
+set backspace=indent,eol,start  " enabling backspace in insert mode
+set t_ut=                   " allows for ctrl-arrow in visual mode
+" tabs
+set shiftwidth=4            " nr of spaces used for autoindenting
+set softtabstop=4           " pretend like spaces are a tab when pressing <BS>
 set expandtab
-
-"clipboard settings
-set clipboard^=unnamedplus
-
+" colorscheme related
+set termguicolors           " true colors in terminals that support it
+let g:solarized_termtrans=0 " non-transparent background
+set background=dark
+colorscheme solarized8_dark
+" misc
+set gdefault                " the /g flag on :s substitutions by default
+set confirm                 " confirming saving changes
+set hidden                  " hide buffers but do not close them
+set showmatch               " show matching brackets
+set clipboard^=unnamedplus  " clipboard integration with +
+" GUI settings
 if has('gui_running')
     set guioptions-=T
     set guioptions-=m
@@ -346,6 +312,10 @@ if has('gui_running')
     set lines=50 columns=90
 endif
 
+" set term=xterm-256color       " set $TERM to xterm256
+" set t_Co=256
+"set listchars="eol:$,tab"
+" set formatprg=par\ -w70       " better external text processor
 "-]
 
 "   KEY MAPPINGS [-
@@ -389,11 +359,11 @@ nnoremap <leader>o o<Esc>k
 nnoremap <leader>l o<Esc>
 
 " invoke bash template
-nnoremap <leader>b :call BashTemplate()<CR>
+nnoremap <leader>b :call Bash()<CR>
+nnoremap <leader>m :call Mdown()<CR>
 
 " syntax highlighting for bash and markdown
 nnoremap <leader>sh :set syntax=sh<CR>
-nnoremap <leader>md :set syntax=markdown<CR>
 
 " rust
 au BufNewFile,BufRead *.rs set filetype=rust
@@ -415,7 +385,6 @@ set pastetoggle=<F6>
 " plugin mappings
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
-"nnoremap <leader>mds :InstantMarkdownPreview<CR>
 "-]
 
 "   THEMING [-
@@ -431,28 +400,24 @@ match TrailingSpaces /\s\{2}$/
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
     \ gui=NONE guifg=DarkGrey guibg=NONE
 highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
-set cursorline
 
 " Italics in comments (solorscheme has to allow it)
 highlight Comment cterm=italic
-
-" set $TERM to xterm256
-" set term=xterm-256color
-"
-" colorscheme related
-" set t_Co=256
-set termguicolors
-let g:solarized_termtrans=0
-set background=dark
-colorscheme solarized8_dark
 "-]
 
 "   COMMANDS AND FUNCTIONS [-
 "   ======================
 
+" folding in vimrc and bash
+autocmd FileType vim,sh setlocal foldmethod=marker
+autocmd FileType vim,sh setlocal foldmarker=[-,-]
+
 " remove trailing white space
 command! Nows :%s/\s\+$//
-"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" unknownn
+" nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
 command! Showmark :InstantMarkdownPreview
 
 " remove trailing whitespaces and ^M chars
@@ -471,9 +436,19 @@ function! Tailf()
 endfunction
 
 " invoke bash template
-function! BashTemplate()
+function! Bash()
     :read ~/.vim/templates/bash.cpp
     set syntax=sh
+    normal gg
+    normal dd
+    normal G
+    normal o
+    normal o
+endfunction
+
+function! Mdown()
+    :read ~/.vim/templates/mdown.cpp
+    set syntax=md
     normal gg
     normal dd
     normal G
@@ -524,9 +499,4 @@ function! MyFollowSymlink(...)
     \ !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>"
     \ w:no_resolve_symlink
  au BufReadPost * nested call MyFollowSymlink(expand('%'))
-
-" better external text formatter
-"set formatprg=par\ -w70
-
 "-]
-

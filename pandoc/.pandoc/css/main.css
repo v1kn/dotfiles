@@ -1,0 +1,84 @@
+body {
+    margin: auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    max-width: 45em;
+    /*background-color: lightgray;*/
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    color: black;
+    /*font-family: Verdana, sans-serif;i*/
+    font-family: Verdana, sans-serif;
+    font-size: 90%;
+    line-height: 140%;
+}
+pre {
+    border: 1px dotted gray;
+    background-color: #ececec;
+    /*background-color: #303030;*/
+    color: #1111111;
+    /*color: #CCCCCC;*/
+    padding: 0.5em;
+    white-space: pre-wrap;                 /* CSS3 browsers  */
+    white-space: -moz-pre-wrap !important; /* 1999+ Mozilla  */
+    white-space: -pre-wrap;                /* Opera 4 thru 6 */
+    white-space: -o-pre-wrap;              /* Opera 7 and up */
+    word-wrap: break-word;                 /* IE 5.5+ and up */
+    overflow-x: auto; */                /* Firefox 2 only */
+}
+code {
+    font-family: monospace;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a {
+    text-decoration: none;
+    color: #2578DA;
+}
+h1, h2, h3, h4, h5 { font-family: verdana;
+                     font-weight: bold;
+                     border-bottom: 1px dotted black;
+                     color: #2578DA; }
+h1 {
+        font-size: 130%;
+}
+
+h2 {
+        font-size: 110%;
+}
+
+h3 {
+        font-size: 95%;
+}
+
+h4 {
+        font-size: 90%;
+        font-style: italic;
+}
+
+h5 {
+        font-size: 90%;
+        font-style: italic;
+}
+
+h1.title {
+        line-height: 1.50;
+        font-size: 200%;
+        font-weight: normal;
+        padding-top: 0.5em;
+        padding-bottom: 1em;
+        text-align: center;
+        border: none;
+}
+
+dt code {
+        font-weight: bold;
+}
+dd p {
+        margin-top: 0;
+}
+
+#footer {
+        padding-top: 1em;
+        font-size: 70%;
+        color: gray;
+        text-align: center;
+        }

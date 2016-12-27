@@ -13,11 +13,10 @@ export EDITOR='vim'
 export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
 export CARGO_HOME=$HOME/.local/cargo
+export QT_QPA_PLATFORMTHEME=qt5ct
 
-# path
-if [[ -z $TMUX ]]; then
-    PATH="$PATH:$HOME/.local/bin"
-fi
+# fixing duplicated path in tmux
+[[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
 
 # replace Caps with Ctrl
 setxkbmap -option ctrl:nocaps
@@ -83,13 +82,11 @@ git_branch()
 }
 
 PS1=""
-if [ -n "$SSH_CLIENT" ]; then
-    PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")\[$Color_Off\]"
-fi
-PS1+="\[$Yellow\][\u@\h]"
-PS1+="\[$Cyan\] [\w]"            # basename of pwd
-PS1+="\[\$(git_color)\]"        # colors git status
-PS1+=" \$(git_branch)"           # prints current branch
+[[ -n "$SSH_CLIENT" ]] && PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")"
+PS1+="\[$Yellow\][\u@\h]"           # u: username; h: hostname
+PS1+="\[$Cyan\] [\w]"               # w: basename of pwd
+PS1+="\[\$(git_color)\]"            # colors git status
+PS1+=" \$(git_branch)"              # prints current branch
 PS1+="\n\[$Color_Off\]"
 PS1+="\[$Cyan\] =>> \[$Color_Off\]"
 export PS1
@@ -156,8 +153,7 @@ HISTFILESIZE=100000
 
 # dont record some commands
 export HISTIGNORE="ls:ll:history:cd"
-
-# -]
+#-]
 
 #   ALIASES [-
 #   =======
@@ -273,36 +269,27 @@ alias mpvtb='mpv --script-opts=osc-layout=topbar'
 
 # check if flacs in subdirectories have album art embedded
 checkpicflac() {
-    find . -depth -type f -name "*.flac" |
-    while read -r track
-    do
+    while read -r track; do
         pic=$(metaflac --list --block-type=PICTURE "$track")
         [[ -z "$pic" ]] && echo ""$track" has no picture"
-    done
+    done <<< $(find . -depth -type f -name "*.flac")
 }
-
 
 # add a YEAR tag to flacs in all subdirectories
 addyearflac() {
-    find . -depth -type f -name "*.flac" |
-    while read -r track
-    do
+    while read -r track; do
         year=$(metaflac --show-tag=DATE "$track" | cut -d= -f 2)
         metaflac --set-tag="YEAR=$year" "$track"
-    done
+    done <<< $(find . -depth -type f -name "*.flac")
 }
-
 
 # check whether flacs in subdirectores have a YEAR tag
 checkyearflac() {
-    find . -depth -type f -name "*.flac" |
-    while read -r track
-    do
+    while read -r track; do
         year=$(metaflac --show-tag=YEAR "$track")
         [[ -z "$year" ]] && echo ""$track" has no YEAR tag"
-    done
+    done <<< $(find . -depth -type f -name "*.flac")
 }
-
 
 # playing current dir files with mpv playlist
 PlayCurrentDir() {
@@ -310,18 +297,21 @@ PlayCurrentDir() {
 }
 alias pcd='PlayCurrentDir'
 
-
 # multi-folder spectrograms
 spectro_flac() {
-    find . -depth -type f -name "*.flac" -print0 | sort -zn |
-    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'sox "{}" -n spectrogram -o "{}.png"
+    find . -depth -type f -name "*.flac" -print0 \
+        | sort -zn \
+        | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
+        sh -c 'sox "{}" -n spectrogram -o "{}.png"
     echo processed "{}"'
 }
 # as above but more powerful; arrays, parallel processes and proper output
 spectro_mass() {
     ext=( -name \*.wav -o -name \*.flac -o -name \*.ape -o -name \*.m4a -o -name \*.mp3 -o -name \*.ogg )
-    find . -depth -type f \( "${ext[@]}" \) -print0 | sort -zn |
-    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'sox "{}" -n spectrogram -o "{}.png"; echo processed "{}"'
+    find . -depth -type f \( "${ext[@]}" \) -print0 \
+        | sort -zn \
+        | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
+        sh -c 'sox "{}" -n spectrogram -o "{}.png"; echo processed "{}"'
 }
 alias spc='spectro_mass'
 alias spcf='spectro_flac'
@@ -361,8 +351,10 @@ twitchm() {
 
 subs-mass() {
     ext=( -iname \*.mp4 -o -iname \*.avi -o -iname \*.mkv )
-    find . -depth -type f \( "${ext[@]}" \) -print0 | sort -zn |
-    xargs -0 -I{} -n1 -P$(($(nproc) / 2)) sh -c 'subdownloader -c -l en --rename-subs -V "{}"; echo processed "{}"'
+    find . -depth -type f \( "${ext[@]}" \) -print0 \
+        | sort -zn \
+        | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
+        sh -c 'subdownloader -c -l en --rename-subs -V "{}"; echo processed "{}"'
 }
 # -]
 
@@ -380,19 +372,21 @@ dicon() {
 
 # removing build dependencies installed with apt-get build-dep
 deprem() {
-    sudo aptitude markauto $(apt-cache showsrc $1 | grep Build-Depends |
-    perl -p -e 's/(?:[\[(].+?[\])]|Build-Depends:|,|\|)//g')
+    sudo aptitude markauto \
+        $(apt-cache showsrc $1 \
+        | grep Build-Depends \
+        | perl -p -e 's/(?:[\[(].+?[\])]|Build-Depends:|,|\|)//g')
 }
 
 # showing installed headers and kernels
 # to uninstall these headers, pipe it through to "| xargs dpkg -r"
 showheader() {
-    dpkg-query -l linux-header* | grep 'ii ' |
-    while read k
-    do
+    while read k; do
         v=$(echo "$k" | cut -d- -f4 | cut -d' ' -f1)
-        [ ! -z "$v" ] && [ "$v" -le $(uname -r | cut -d- -f 2) ] && echo $k | cut -d' ' -f2
-    done
+        [ ! -z "$v" ] \
+            && [ "$v" -le $(uname -r | cut -d- -f 2) ] \
+            && echo $k | cut -d' ' -f2
+    done <<< $(dpkg-query -l linux-header* | grep 'ii ')
 }
 showkernel() {
     dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.4' | awk '{print $2}'
@@ -400,8 +394,7 @@ showkernel() {
 
 # list all PPAs installed
 listppa() {
-    grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt |
-    sort -u
+    grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u
 }
 
 # check if PPAs are compatible with this ubuntu version
@@ -501,11 +494,9 @@ getpage() {
 
 # adding all virtual machines to virtualbox at once
 vbox_add() {
-find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox" |
-while read vm
-do
+while read vm; do
     VBoxManage registervm "$vm"
-done
+done <<< $(find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox")
 }
 
 top10() {
@@ -513,12 +504,10 @@ top10() {
 }
 
 vbox_snapvm() {
-    VBoxManage list vms | cut -d\" -f2 |
-    while read vm
-    do
+    while read vm; do
         VBoxManage snapshot "$vm" delete 0
         VBoxManage snapshot "$vm" take 0
-    done
+    done <<< $(VBoxManage list vms | cut -d\" -f2)
 }
 
 termcheck() {
@@ -542,12 +531,15 @@ md2html() {
         fenced_code_attributes
         yaml_metadata_block
         shortcut_reference_links
+        blank_before_header
+        implicit_header_references
+        superscript
+        subscript
     )
     local pandoc_options=(
         -f "${format[*]}"
-        --standalone                        # -s produce output with header and footer
-        --smart                             # -S produce typographically correct output
-        --toc                               # table of contents
+        --standalone                # -s produce output with header and footer
+        --smart                     # -S produce typographically correct output
         -c $HOME/.pandoc/css/jekyll.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
@@ -561,6 +553,10 @@ md2pdf() {
         fenced_code_attributes
         yaml_metadata_block
         shortcut_reference_links
+        blank_before_header
+        implicit_header_references
+        superscript
+        subscript
     )
     pandoc \
         -f "${format[*]}" \

@@ -1,6 +1,8 @@
 " Name:     Solarized colorscheme for Vim 8
 " Author:   Lifepillar <lifepillar@lifepillar.me>
 " License:  OSI approved MIT license (see end of this file)
+" Modified: disabled bold font on fold titles 79ln
+"           v1kn, 2016/12/26
 
 hi clear
 if exists("syntax_on")
@@ -74,7 +76,8 @@ hi! VertSplit cterm=NONE gui=NONE ctermfg=10 guifg=#586e75 ctermbg=10 guibg=#586
 hi! VisualNOS ctermfg=NONE guifg=NONE ctermbg=0 guibg=#073642 cterm=NONE,reverse gui=NONE,reverse
 hi! WarningMsg cterm=NONE,bold gui=NONE,bold ctermfg=9 guifg=#cb4b16 ctermbg=NONE guibg=NONE
 hi! WildMenu ctermfg=7 guifg=#eee8d5 ctermbg=0 guibg=#073642 cterm=NONE,reverse gui=NONE,reverse
-hi! Folded cterm=NONE,bold gui=NONE,bold ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642 guisp=#002b36
+"hi! Folded cterm=NONE,bold gui=NONE,bold ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642 guisp=#002b36
+hi! Folded cterm=NONE gui=NONE ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642 guisp=#002b36
 hi! FoldColumn cterm=NONE gui=NONE ctermfg=12 guifg=#839496 ctermbg=0 guibg=#073642
 if get(g:, "solarized_diffmode", "") == "high"
   hi! DiffAdd cterm=NONE,reverse gui=NONE,reverse ctermfg=2 guifg=#719e07 ctermbg=NONE guibg=NONE

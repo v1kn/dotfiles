@@ -1,4 +1,8 @@
-#!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
-#IFS=$' \n\t' => default
+#!/usr/bin/env bash
+
+##
+##
+##  v1kn
+##  https://github.com/v1kn
+##
+##

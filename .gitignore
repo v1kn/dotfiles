@@ -28,39 +28,44 @@ vim/.vim/swap/
 vim/.vim/backup/
 vim/.vim/plugged/
 
-## caches
+#   caches
 *cache*
 
-## aconfmgr
+#   aconfmgr
 aconfmgr/.config/aconfmgr/files/
 aconfmgr/.config/aconfmgr/90-unsorted.log
 
-## cmus
+#   cmus
 cmus/.config/cmus/*
 !cmus/.config/cmus/rc
 
 
-### mpv ###
+#   mpv
 mpv/.config/mpv/watch_later/
 
-### newsbeuter ###
+#   newsbeuter
 newsbeuter/.newsbeuter/*
 !newsbeuter/.newsbeuter/config
 
-### ranger ###
+#   pandoc
+pandoc/.pandoc/+
+!pandoc/.pandoc/css
+!pandoc/.pandoc/templates
+
+#   ranger
 ranger/.config/ranger/examples/
 ranger/.config/ranger/bookmarks
 ranger/.config/ranger/commands_sample.py
 ranger/.config/ranger/history
 ranger/.config/ranger/tagged
 
-### vimperator ###
+#   vimperator
 vimperator/.vimperator/info/
 
-### zathura ###
+#   zathura
 zathura/.local/
 
-### whole apps ###
+#   whole apps
 atom/
 clementine/
 fonts-icons-themes/
