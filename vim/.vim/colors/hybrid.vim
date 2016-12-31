@@ -4,6 +4,7 @@
 " Modified:   27 Jan 2013 07:33 AM AEST
 " License:    MIT
 " Modified for including italics; vlkn 161205,lnr345
+" Modified for changing folded column bg; v1kn 161230,lnr116
 
 " Description:"{{{
 " ----------------------------------------------------------------------------
@@ -110,7 +111,8 @@ let s:palette.gui.aqua       = { 'dark' : "#8abeb7"        , 'light' : "#005f5f"
 let s:palette.gui.blue       = { 'dark' : "#81a2be"        , 'light' : "#00005f" }
 let s:palette.gui.purple     = { 'dark' : "#b294bb"        , 'light' : "#5f005f" }
 let s:palette.gui.window     = { 'dark' : "#303030"        , 'light' : "#9e9e9e" }
-let s:palette.gui.darkcolumn = { 'dark' : "#1c1c1c"        , 'light' : "#808080" }
+"let s:palette.gui.darkcolumn = { 'dark' : "#1c1c1c"        , 'light' : "#808080" }
+let s:palette.gui.darkcolumn = { 'dark' : "#1c1c1c"        , 'light' : "#a8a8a8" }
 let s:palette.gui.addbg      = { 'dark' : "#5F875F"        , 'light' : "#d7ffd7" }
 let s:palette.gui.addfg      = { 'dark' : "#d7ffaf"        , 'light' : "#005f00" }
 let s:palette.gui.changebg   = { 'dark' : "#5F5F87"        , 'light' : "#d7d7ff" }

@@ -2,29 +2,29 @@
 #   PREAMBLE [-
 #   ========
 
-# If not running interactively, don't do anything
+#   If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# export variables
+#   export variables
 export EDITOR='vim'
 export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
 export CARGO_HOME=$HOME/.local/cargo
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# fixing duplicated path in tmux
+#   fixing duplicated path in tmux
 [[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
 
-# replace Caps with Ctrl
+#   replace Caps with Ctrl
 setxkbmap -option ctrl:nocaps
 
-# make less more friendly for non-text input files, see lesspipe(1)
+#   make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# enable programmable completion features
+#   enable programmable completion features
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         . /usr/share/bash-completion/bash_completion
@@ -33,7 +33,6 @@ if ! shopt -oq posix; then
     fi
 fi
 # -]
-
 #   PROMPT [-
 #   ======
 
@@ -65,7 +64,6 @@ git_color()
     echo -e $Red
   fi
 }
-
 git_branch()
 {
   local git_status="$(git status 2> /dev/null)"
@@ -80,7 +78,6 @@ git_branch()
     echo "($commit)"
   fi
 }
-
 PS1=""
 [[ -n "$SSH_CLIENT" ]] && PS1+="\[$Yellow\]("${SSH_CLIENT%% *}")"
 PS1+="\[$Yellow\][\u@\h]"           # u: username; h: hostname
@@ -91,74 +88,73 @@ PS1+="\n\[$Color_Off\]"
 PS1+="\[$Cyan\] =>> \[$Color_Off\]"
 export PS1
 
-# legacy backup
+#   legacy backup
 # PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\$ '
-# -]
 
+# -]
 #   GENERAL MODS [-
 #   ============
 
-# prevent file overwrite with > redirection ( use >| to force)
+#   prevent file overwrite with > redirection ( use >| to force)
 set -o noclobber
 
-# Perform file completion in a case insensitive fashion
+#   Perform file completion in a case insensitive fashion
 bind "set completion-ignore-case off"
 
-# Treat hyphens and underscores as equivalent
+#   Treat hyphens and underscores as equivalent
 bind "set completion-map-case on"
 
-# Display matches for ambiguous patterns at first tab press
+#   Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous off"
 
-# Entering a directory name as a bare word will change into that directory
+#   Entering a directory name as a bare word will change into that directory
 shopt -s autocd
 
-# Automatically correct off-by-one typing mistakes when changing directories
+#   Automatically correct off-by-one typing mistakes when changing directories
 shopt -s cdspell
 
-# Correct off-by-one typing mistakes when tab-completing directories
+#   Correct off-by-one typing mistakes when tab-completing directories
 shopt -s dirspell
 
-# Enable fancy globbing functions
+#   Enable fancy globbing functions
 shopt -s extglob
 
-# update window size after every command
+#   update window size after every command
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
+#   If set, the pattern "**" used in a pathname expansion context will
+#   match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-# Don't try to complete on empty lines
+#   Don't try to complete on empty lines
 shopt -s no_empty_cmd_completion
 
-# Globs won't consider case
+#   Globs won't consider case
 shopt -s nocaseglob
 
-# Globs will consider hidden files, too
+#   Globs will consider hidden files, too
 shopt -s dotglob
 
-# combine multiline commands in history
+#   combine multiline commands in history
 shopt -s cmdhist
 
-# append to the history file, don't overwrite it
+#   append to the history file, don't overwrite it
 shopt -s histappend
 
-# don't put duplicate lines or lines starting with space in the history.
+#   don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:erasedups
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+#   for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=500000
 HISTFILESIZE=100000
 
-# dont record some commands
+#   dont record some commands
 export HISTIGNORE="ls:ll:history:cd"
 #-]
-
 #   ALIASES [-
 #   =======
 
-# package management
+#   package management
 alias upda='sudo pacman -Syu'
 alias updaa='sudo pacman -Syyu'
 alias updo='sudo zypper up'
@@ -188,21 +184,21 @@ alias rdepsa='pactree -r'
 alias rdepsu='apt-cache rdepends'
 alias depsu='apt-cache depends'
 
-# trash
+#   trash
 alias trl='trash-list'
 alias tre='trash-empty'
 alias trrm='trash-rm $1'
 alias trrs='restore-trash'
 alias trp='trash-put'
 
-# colors
+#   colors
 alias ls='ls --color=auto -h --group-directories-first -CF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='colordiff'
 
-# vim
+#   vim
 alias vir='vim $HOME/.vimrc'
 alias vib='vim $HOME/.bashrc'
 alias vilog='view -M "+call Tailf()" $1'
@@ -239,16 +235,14 @@ alias io='cd $HOME/grep/vlkn.github.io'
 alias cal='cal -3':
 alias dfc='dfc -t -tmpfs'
 alias netres='sudo systemctl restart NetworkManager'
-
-#twitch
+#   twitch
 alias arism='twitchm avoidingthepuddle'
 alias arisb='twitchb avoidingthepuddle'
 alias hobm='twitchm the_happy_hob'
 alias hobb='twitchb the_happy_hob'
 alias distort2m='twitchm distortion2'
 alias distort2b='twitchb distortion2'
-
-# complex
+#   complex
 alias pipes='$HOME/filez/linux/scripts-ref/pipsies.sh -p 2 -f 40 -R -r 5000'
 alias pipesx='$HOME/filez/linux/scripts-ref/pipesx.sh -n 2 -t 0 -t 1 -R -r 5000'
 alias flacsplit='shnsplit -f *.cue -t "%n-%t" -o flac *.flac'
@@ -260,14 +254,13 @@ alias tvb='mpv --ytdl-format=22 $1'
 alias tvm='mpv --ytdl-format=18 $1'
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
 # -]
-
 #   FUNCTIONS [-
 #   =========
 
 #   Audio [-
 #   -----
 
-# check if flacs in subdirectories have album art embedded
+#   check if flacs in subdirectories have album art embedded
 checkpicflac() {
     while read -r track; do
         pic=$(metaflac --list --block-type=PICTURE "$track")
@@ -275,7 +268,7 @@ checkpicflac() {
     done <<< $(find . -depth -type f -name "*.flac")
 }
 
-# add a YEAR tag to flacs in all subdirectories
+#   add a YEAR tag to flacs in all subdirectories
 addyearflac() {
     while read -r track; do
         year=$(metaflac --show-tag=DATE "$track" | cut -d= -f 2)
@@ -283,7 +276,7 @@ addyearflac() {
     done <<< $(find . -depth -type f -name "*.flac")
 }
 
-# check whether flacs in subdirectores have a YEAR tag
+#   check whether flacs in subdirectores have a YEAR tag
 checkyearflac() {
     while read -r track; do
         year=$(metaflac --show-tag=YEAR "$track")
@@ -291,13 +284,13 @@ checkyearflac() {
     done <<< $(find . -depth -type f -name "*.flac")
 }
 
-# playing current dir files with mpv playlist
+#   playing current dir files with mpv playlist
 PlayCurrentDir() {
     mpv --no-video --playlist <(find "$PWD" -type f -follow | sort)
 }
 alias pcd='PlayCurrentDir'
 
-# multi-folder spectrograms
+#   multi-folder spectrograms
 spectro_flac() {
     find . -depth -type f -name "*.flac" -print0 \
         | sort -zn \
@@ -305,7 +298,7 @@ spectro_flac() {
         sh -c 'sox "{}" -n spectrogram -o "{}.png"
     echo processed "{}"'
 }
-# as above but more powerful; arrays, parallel processes and proper output
+#   as above but more powerful; arrays, parallel processes and proper output
 spectro_mass() {
     ext=( -name \*.wav -o -name \*.flac -o -name \*.ape -o -name \*.m4a -o -name \*.mp3 -o -name \*.ogg )
     find . -depth -type f \( "${ext[@]}" \) -print0 \
@@ -315,17 +308,10 @@ spectro_mass() {
 }
 alias spc='spectro_mass'
 alias spcf='spectro_flac'
-
 # -]
-
 #   Video [-
 #   -----
 
-# using livestreamer and mpv to play videos off of internet
-# deprecated. use mpv. leaving one function for historical purposes
-#tvb() {
-#    livestreamer --player-continuous-http --player-passthrough hls --hls-segment-threads 3 --player "mpv --cache 10240" $1 best
-#}
 twitchb() {
     livestreamer \
         --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 \
@@ -357,20 +343,18 @@ subs-mass() {
         sh -c 'subdownloader -c -l en --rename-subs -V "{}"; echo processed "{}"'
 }
 # -]
-
 #   Japanese [-
 #   --------
 
-# list on'yomi of a kanji, using kanjidic
+#   list on'yomi of a kanji, using kanjidic
 dicon() {
     perl -CSAD -e '$r=join q(|),grep /\p{cjk}/,split//,qq(@ARGV)||qx(xclip -o);$r||die qq(nothing given\n);open$f,q(<),qq($ENV{HOME}/.filez/dic/kanjidicx.utf8);while(<$f>){if(/^($r)/){$k=$1;($o)=/\s(\p{kana}+(\s\p{kana}+)*)\s/;print qq($k: $o\n)}}' "$@"
 }
 # -]
-
 #   Package management [-
 #   ------------------
 
-# removing build dependencies installed with apt-get build-dep
+#   removing build dependencies installed with apt-get build-dep
 deprem() {
     sudo aptitude markauto \
         $(apt-cache showsrc $1 \
@@ -378,8 +362,8 @@ deprem() {
         | perl -p -e 's/(?:[\[(].+?[\])]|Build-Depends:|,|\|)//g')
 }
 
-# showing installed headers and kernels
-# to uninstall these headers, pipe it through to "| xargs dpkg -r"
+#   showing installed headers and kernels
+#   to uninstall these headers, pipe it through to "| xargs dpkg -r"
 showheader() {
     while read k; do
         v=$(echo "$k" | cut -d- -f4 | cut -d' ' -f1)
@@ -392,12 +376,12 @@ showkernel() {
     dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.4' | awk '{print $2}'
 }
 
-# list all PPAs installed
+#   list all PPAs installed
 listppa() {
     grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u
 }
 
-# check if PPAs are compatible with this ubuntu version
+#   check if PPAs are compatible with this ubuntu version
 checkppa() {
     dist=$1
     ppas=$(grep -RoPish '(?<=ppa.launchpad.net/)[^/]+/[^/ ]+' /etc/apt | sort -u)
@@ -410,16 +394,15 @@ checkppa() {
     done <<< "$ppas"
 }
 # -]
-
 #   git stuff [-
 #   ---------
 
-# .gitignore file generation
+#   .gitignore file generation
 gi() {
     curl -L -s https://www.gitignore.io/api/"$@" ;
 }
 
-# create git repo folder with basic files inside
+#   create git repo folder with basic files inside
 mkrep() {
     mkdir -p $HOME/grepo/"$@"
     cd $HOME/grepo/"$1"
@@ -427,25 +410,24 @@ mkrep() {
     cp $HOME/grepo/dotfiles/LICENSE.md .
     gi linux,vim > .gitignore
 }
-# git fetch for multiple repos
+#   git fetch for multiple repos
 gfall() {
     ls | xargs -I{} -n1 -P$(nproc) git -C {} fetch
 }
-# git pull for multiple repos
+#   git pull for multiple repos
 gpall() {
     ls | xargs -i{} -n1 -P$(nproc) git -C {} pull
 }
 # -]
-
 #   Filesystem [-
 #   ----------
 
-# create directory and cd into it
+#   create directory and cd into it
 mkd() {
     mkdir -p "$@" && cd "$@"
 }
 
-# count lines in files, omitting newlines and/or comments
+#   count lines in files, omitting newlines and/or comments
 CountLines_NoNewline() {
     grep -cve '^\s*$' $1
 }
@@ -455,24 +437,25 @@ CountLines_NoNewline_NoHashComment() {
 alias clin='CountLines_NoNewline'
 alias clinc='CountLines_NoNewline_NoHashComment'
 # -]
-
 #   Web [-
 #   ---
 
-# getting geolocation info from google maps api
+#   getting geolocation info from google maps api
 geoloc() {
     wget -O- -q https://maps.googleapis.com/maps/api/geocode/json?address=$1
 }
-# get weather on the commandline
+#   get weather on the commandline
 wttr() {
     curl -k "https://wttr.in/$1"
 }
-# tny urls
+#   tny urls
 tny() {
-    echo $(wget -qO- http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1)
+    echo $(wget -qO- \
+        http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1)
 }
 untny() {
-    echo $(wget -qO- http://tny.im/yourls-api.php?action=expand\&format=simple\&shorturl=$1)
+    echo $(wget -qO- \
+        http://tny.im/yourls-api.php?action=expand\&format=simple\&shorturl=$1)
 }
 
 getpage() {
@@ -488,15 +471,14 @@ getpage() {
     wget "${wget_options[@]}" "$@"
 }
 # -]
-
 #   Other [-
 #   -----
 
-# adding all virtual machines to virtualbox at once
+#   adding all virtual machines to virtualbox at once
 vbox_add() {
-while read vm; do
-    VBoxManage registervm "$vm"
-done <<< $(find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox")
+    while read vm; do
+        VBoxManage registervm "$vm"
+    done <<< $(find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox")
 }
 
 top10() {
@@ -519,7 +501,6 @@ termcheck() {
     echo -e "\e[31mHello World\e[0m"
 }
 # -]
-
 #       Text [-
 #       ----
 

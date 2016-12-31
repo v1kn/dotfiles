@@ -75,7 +75,6 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 "-]
-
 "   PLUGIN CONFIG [-
 "   =============
 
@@ -137,7 +136,6 @@ function! LightlineFugitive()
   return ''
 endfunction
 ""-]
-
 "   AIRLINE [-
 "   -------
 let g:airline_powerline_fonts = 1
@@ -178,28 +176,23 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.linenr = ''
 ""-]
-
 "   CtrlP [-
 "   -----
 let g:ctrlp_show_hidden = 1
 ""-]
-
 "   Gitgutter [-
 
 "let g:gitgutter_map_keys = 0
 
 ""-]
-
 "   Goyo [-
 "   ----
 let g:goyo_linenr = 1
 ""-]
-
 "   Nerdtree [-
 "   --------
 let NERDTreeShowHidden=1
 ""-]
-
 "   Startify [-
 "   --------
 let g:startify_list_order = ['files']
@@ -208,7 +201,6 @@ let g:startify_update_oldfiles = 0
 let g:startify_enable_unsafe = 1
 let g:startify_custom_header = []
 ""-]
-
 "   Syntastic [-
 "   ---------
 "set statusline+=%#warningmsg#
@@ -232,19 +224,17 @@ let g:startify_custom_header = []
 "highlight link SyntasticStyleErrorSign SignColumn
 "highlight link SyntasticStyleWarningSign SignColumn
  ""-]
-
 "   Vim-instant-markdown [-
 "   --------------------
 
 "let g:instant_markdown_autostart = 0
 ""-]
 "-]
-
 "   BASIC CONFIG [-
 "   ============
 
 filetype plugin indent on
-" swap, undos and backups, viminfo
+"   swap, undos and backups, viminfo
 set backup
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
@@ -253,14 +243,14 @@ set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
 set viminfo+=n~/.vim/viminfo
-" lines
+"   lines
 set cursorline
 set number                  " line numbers
 set relativenumber          " relative line numbers
 set ruler                   " line position
 set scrolloff=10            " smallest distance from bottom line
 set breakindent             " keeps indentation of new lines when indenting
-" commands
+"   commands
 set history=50              " set a limit for history of searches and commands
 set showcmd                 " command display in BR corner
 set cmdheight=2             " enhanced statusbar
@@ -268,7 +258,7 @@ set laststatus=2            " enhanced statusbar
 set wildmenu
 set wildmode=longest,list,full
 set wildignorecase
-" wrapping
+"   wrapping
 set wrap                    " non-destructive wrap according to window size
 set linebreak               " break lines on non-words
 set nolist                  " list would turn off linebreak
@@ -280,30 +270,30 @@ set hlsearch                " search highlight
 set incsearch               " display match for pattern when halfway typing it
 set ignorecase              " ignore case while searching
 set smartcase               " ignore case while searching
-" syntax
+"   syntax
 syntax on
 syntax enable
-" modes
+"   modes
 set timeoutlen=1000         " fix delay in switching between modes
 set ttimeoutlen=0           " fix delay in switching between modes
 set backspace=indent,eol,start  " enabling backspace in insert mode
 set t_ut=                   " allows for ctrl-arrow in visual mode
-" tabs
+"   tabs
 set shiftwidth=4            " nr of spaces used for autoindenting
 set softtabstop=4           " pretend like spaces are a tab when pressing <BS>
 set expandtab
-" colorscheme related
+"   colorscheme related
 set termguicolors           " true colors in terminals that support it
 let g:solarized_termtrans=0 " non-transparent background
 set background=dark
 colorscheme solarized8_dark
-" misc
+"   misc
 set gdefault                " the /g flag on :s substitutions by default
 set confirm                 " confirming saving changes
 set hidden                  " hide buffers but do not close them
 set showmatch               " show matching brackets
 set clipboard^=unnamedplus  " clipboard integration with +
-" GUI settings
+"   GUI settings
 if has('gui_running')
     set guioptions-=T
     set guioptions-=m
@@ -317,58 +307,58 @@ endif
 "set listchars="eol:$,tab"
 " set formatprg=par\ -w70       " better external text processor
 "-]
-
 "   KEY MAPPINGS [-
 "   ============
 
-" leader
+"   leader
 let mapleader = "\<Space>"
 
-" colorscheme swapping
+"   colorscheme swapping
 nnoremap <leader>sd :colorscheme solarized8_dark<CR>
 nnoremap <leader>sl :colorscheme solarized8_light<CR>
 nnoremap <leader>gb :colorscheme gruvbox<CR>
 nnoremap <leader>ap :colorscheme apprentice<CR>
 nnoremap <leader>bd :colorscheme base16-default<CR>
 nnoremap <leader>hb :colorscheme hybrid<CR>
+nnoremap <leader>ds :colorscheme disciple<CR>
 nnoremap <leader>bgd :set background=dark<CR>
 nnoremap <leader>bgl :set background=light<CR>
 
-" jj in insert mode exits to normal mode
+"   jj in insert mode exits to normal mode
 inoremap jj <ESC>
 
-" save read-only files with sudo
+"   save read-only files with sudo
 cmap w!! w !sudo tee > /dev/null %
 
-" reload vimrc
+"   reload vimrc
 nnoremap <leader>r :source %<CR>
 
-" save a file
+"   save a file
 nnoremap <leader>w :w<CR>
 
-" <C-L> to turn off search highlighting
+"   <C-L> to turn off search highlighting
 nnoremap <C-L> :nohl<CR><C-L>
 
-" F5 to choose buffer from list
+"   F5 to choose buffer from list
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
-" newlines in normal mode
+"   newlines in normal mode
 nnoremap <leader>i O<Esc>
 nnoremap <leader>k O<Esc>j
 nnoremap <leader>o o<Esc>k
 nnoremap <leader>l o<Esc>
 
-" invoke bash template
+"   invoke bash template
 nnoremap <leader>b :call Bash()<CR>
 nnoremap <leader>m :call Mdown()<CR>
 
-" syntax highlighting for bash and markdown
+"   syntax highlighting for bash and markdown
 nnoremap <leader>sh :set syntax=sh<CR>
 
-" rust
+"   rust
 au BufNewFile,BufRead *.rs set filetype=rust
 
-" manipulating clipboard  pastes
+"   manipulating clipboard  pastes
 vmap <leader>y "+y
 vmap <leader>d "+d
 vmap <leader>p "+p
@@ -376,56 +366,54 @@ vmap <leader>P "+P
 nmap <leader>p "+p
 nmap <leader>P "+P
 
-" select previously pasted text, or read into the buffer via :r!
+"   select previously pasted text, or read into the buffer via :r!
 nnoremap gV `[V`]
 
-" toggle set paste
+"   toggle set paste
 set pastetoggle=<F6>
 
-" plugin mappings
+"   plugin mappings
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
 "-]
-
 "   THEMING [-
 "   =======
 
-" highlight double white space in markdown
+"   highlight double white space in markdown
 highlight TrailingSpaces ctermbg=darkgreen guibg=darkgreen
 autocmd ColorScheme * highlight TrailingSpaces
     \ ctermbg=darkgreen guibg=darkgreen
 match TrailingSpaces /\s\{2}$/
 
-" linenr and cursorline highlights
+"   linenr and cursorline highlights
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
     \ gui=NONE guifg=DarkGrey guibg=NONE
 highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 
-" Italics in comments (solorscheme has to allow it)
+"   Italics in comments (solorscheme has to allow it)
 highlight Comment cterm=italic
 "-]
-
 "   COMMANDS AND FUNCTIONS [-
 "   ======================
 
-" folding in vimrc and bash
+"   folding in vimrc and bash
 autocmd FileType vim,sh setlocal foldmethod=marker
 autocmd FileType vim,sh setlocal foldmarker=[-,-]
 
-" remove trailing white space
+"   remove trailing white space
 command! Nows :%s/\s\+$//
 
-" unknownn
+"   unknownn
 " nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 command! Showmark :InstantMarkdownPreview
 
-" remove trailing whitespaces and ^M chars
+"   remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml
     \ autocmd BufWritePre <buffer> :call
     \ setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-" testing function for reading logfiles
+"   testing function for reading logfiles
 function! Tailf()
     while 1
         e
@@ -435,7 +423,7 @@ function! Tailf()
     endwhile
 endfunction
 
-" invoke bash template
+"   invoke bash template
 function! Bash()
     :read ~/.vim/templates/bash.cpp
     set syntax=sh
@@ -456,7 +444,6 @@ function! Mdown()
     normal o
 endfunction
 "-]
-
 "   EXPERIMENTAL [-
 "   ============
 
