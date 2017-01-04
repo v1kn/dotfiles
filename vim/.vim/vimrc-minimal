@@ -1,0 +1,75 @@
+set nocompatible
+filetype plugin indent on
+set cursorline
+set number
+set relativenumber
+set ruler
+set scrolloff=10
+set breakindent
+set showcmd
+set cmdheight=2
+set laststatus=2
+set wildmenu
+set wildmode=longest,list,full
+set wildignorecase
+set wrap
+set linebreak
+set nolist
+set textwidth=80
+set colorcolumn=80
+set formatoptions=cqmM
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+syntax on
+syntax enable
+set timeoutlen=1000
+set ttimeoutlen=0
+set backspace=indent,eol,start
+set t_ut=
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set termguicolors
+set gdefault
+set confirm
+set hidden
+set showmatch
+set clipboard^=unnamedplus
+set shortmess=I
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
+    \ gui=NONE guifg=DarkGrey guibg=NONE
+highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+let mapleader = "\<Space>"
+inoremap jj <ESC>
+nnoremap <leader>r :source %<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <C-L> :nohl<CR><C-L>
+nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <leader>i O<Esc>
+nnoremap <leader>k O<Esc>j
+nnoremap <leader>o o<Esc>k
+nnoremap <leader>l o<Esc>
+nnoremap <leader>sh :set syntax=sh<CR>
+vmap <leader>y "+y
+vmap <leader>d "+d
+vmap <leader>p "+p
+vmap <leader>P "+P
+nmap <leader>p "+p
+nmap <leader>P "+P
+nnoremap <leader>sd :colorscheme solarized8_dark<CR>
+nnoremap <leader>sl :colorscheme solarized8_light<CR>
+nnoremap <leader>gb :colorscheme gruvbox<CR>
+nnoremap <leader>ap :colorscheme apprentice<CR>
+nnoremap <leader>bd :colorscheme base16-default<CR>
+nnoremap <leader>hb :colorscheme hybrid<CR>
+nnoremap <leader>ds :colorscheme disciple<CR>
+nnoremap <leader>bgd :set background=dark<CR>
+nnoremap <leader>bgl :set background=light<CR>
+set pastetoggle=<F6>
+if filereadable( expand("$HOME/.vim/colors/solarized8_dark.vim") )
+    let g:solarized_termtrans=0
+    set background=dark
+    colorscheme solarized8_dark
+endif

@@ -13,3 +13,6 @@ VBoxManage snapshot vmname take snapname
 
 # delete a snspshot
 VMoxManage snapshot vmname delete snapname
+
+# resize virtual HD (only for VDI, dynamically allocated, and expanding)
+VBoxManage modifyhd machine.vdi --resize <size in MB>

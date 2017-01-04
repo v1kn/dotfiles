@@ -35,3 +35,10 @@ find . -type f -name "*.ape" | while read file; do ffmpeg -i "$file" "${file%ape
 
 # extract subtitles from mkv
 ffmpeg -i infile.mkv -map 0:s:0 subs.srt
+
+# transcoding avi into mkv, using libx264
+ffmpeg -i infile.avi -sameq -vcodec libx264 -threads 9 -acodec copy outfile.mkv
+
+# when there is an error "missing headers or frames"
+# add appropriate flags, like so
+ffmpeg -fflags +genpts -i infile outfile

@@ -1,0 +1,23 @@
+##
+##  package-cleanup
+##      :: utility for package cleanup and problem solving on RPM-based systems
+##  part of `yum-utils` package
+##
+
+# list packages not available in currently configured repos
+package-cleanup --orphans
+
+# list issues within package management
+package-cleanup --problems
+
+# list packages not referred to by any other RPMs
+package-cleanup --leaves
+
+# scans for duplicate RPMs
+package-cleanup --dupes
+
+# cleans older duplicates
+package-cleanup --cleandupes
+
+# remove older kernels leaving two newest
+package-cleanup --oldkernels --count=2

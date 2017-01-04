@@ -203,6 +203,7 @@ alias vir='vim $HOME/.vimrc'
 alias vib='vim $HOME/.bashrc'
 alias vilog='view -M "+call Tailf()" $1'
 alias vfs='sudo vim /etc/fstab'
+alias vimin='vim -u "$HOME"/.vim/vimrc-minimal'
 
 alias ll='ls -alFp'
 alias la='ls -A'
@@ -542,7 +543,7 @@ md2pdf() {
     pandoc \
         -f "${format[*]}" \
         -V fontsize=12pt \
-        -V mainfont="TakaoMincho" \
+        -V CJKmainfont="TakaoMincho" \
         --latex-engine=xelatex \
         -S \
         --toc \
