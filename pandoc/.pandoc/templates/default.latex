@@ -1,4 +1,19 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{extarticle}
+
+%   This part is a modification, to let referenced figures be closeby,
+%   when converting from md to pdf
+%   https://tex.stackexchange.com/questions/101725/latex-figures-appear-before-text-in-pandoc-markdown
+%   pandoc needs an extension - implicit_figures
+\usepackage{float}
+\let\origfigure=\figure
+\let\endorigfigure=\endfigure
+\renewenvironment{figure}[1][]{%
+  \origfigure[H]
+}{%
+  \endorigfigure
+}
+%   end of modification
+
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$

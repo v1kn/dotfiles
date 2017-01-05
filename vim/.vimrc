@@ -400,8 +400,8 @@ highlight Comment cterm=italic
 "   ======================
 
 "   folding in vimrc and bash
-autocmd FileType vim,sh setlocal foldmethod=marker
-autocmd FileType vim,sh setlocal foldmarker=[-,-]
+autocmd FileType vim,sh,text setlocal foldmethod=marker
+autocmd FileType vim,sh,text setlocal foldmarker=[-,-]
 
 "   remove trailing white space
 command! Nows :%s/\s\+$//
@@ -489,4 +489,20 @@ function! MyFollowSymlink(...)
     \ !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>"
     \ w:no_resolve_symlink
  au BufReadPost * nested call MyFollowSymlink(expand('%'))
+
+ " testing commenting autogroup:
+ " http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+ " https://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim
+augroup commenting
+    autocmd!
+    autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+    autocmd FileType conf,fstab       let b:comment_leader = '# '
+    autocmd FileType tex              let b:comment_leader = '% '
+    autocmd FileType mail             let b:comment_leader = '> '
+    autocmd FileType vim              let b:comment_leader = '" '
+augroup END
+
+noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 "-]

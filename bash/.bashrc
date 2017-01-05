@@ -522,7 +522,7 @@ md2html() {
         -f "${format[*]}"
         --standalone                # -s produce output with header and footer
         --smart                     # -S produce typographically correct output
-        -c $HOME/.pandoc/css/jekyll.css     # path to custom css styles
+        -c $HOME/.pandoc/css/jekyll-test.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
 }
@@ -536,6 +536,7 @@ md2pdf() {
         yaml_metadata_block
         shortcut_reference_links
         blank_before_header
+        implicit_figures
         implicit_header_references
         superscript
         subscript
@@ -543,6 +544,7 @@ md2pdf() {
     pandoc \
         -f "${format[*]}" \
         -V fontsize=12pt \
+        -V mainfont="Noto Sans" \
         -V CJKmainfont="TakaoMincho" \
         --latex-engine=xelatex \
         -S \

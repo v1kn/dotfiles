@@ -10,6 +10,14 @@ $endfor$
 $if(date-meta)$
   <meta name="date" content="$date-meta$" />
 $endif$
+<!-- modified to add source and link metadata entries -->
+$if(source-meta)$
+  <meta name="source" content="$source-meta$" />
+$endif$
+$if(link-meta)$
+  <meta name="link" content="$link-meta$" />
+$endif$
+<!-- end of mod -->
 $if(keywords)$
   <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
 $endif$
@@ -49,6 +57,14 @@ $endfor$
 $if(date)$
 <h3 class="date">$date$</h3>
 $endif$
+<!-- modified to add source and link metadata entries -->
+$if(source)$
+<h4 class="source">$source$</h4>
+$endif$
+$if(link)$
+<h4 class="link">$link$</h4>
+$endif$
+<!-- end of mod -->
 </div>
 $endif$
 $if(toc)$
