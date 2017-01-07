@@ -378,6 +378,11 @@ set pastetoggle=<F6>
 "   plugin mappings
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>gs :Gstatus<CR>
+
+" bindings for commenting function
+noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
 "-]
 "   THEMING [-
 "   =======
@@ -442,10 +447,33 @@ function! Mdown()
     set syntax=md
     normal gg
     normal dd
+    normal O---
     normal G
     normal o
     normal o
 endfunction
+
+" commenting autogroup:
+" http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
+" https://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim
+augroup commenting
+    autocmd!
+    autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+    autocmd FileType conf,fstab       let b:comment_leader = '# '
+    autocmd FileType tex              let b:comment_leader = '% '
+    autocmd FileType mail             let b:comment_leader = '> '
+    autocmd FileType vim              let b:comment_leader = '" '
+augroup END
+
+" unfold one time on md files with only H2 headers
+function! UnfoldH2()
+     if search("===") == 0
+         set foldlevel=1
+         " or: normal G; normal zo; normal gg
+     endif
+endfunction
+autocmd BufRead *.md call UnfoldH2()
 "-]
 "   EXPERIMENTAL [-
 "   ============
@@ -490,19 +518,5 @@ function! MyFollowSymlink(...)
     \ w:no_resolve_symlink
  au BufReadPost * nested call MyFollowSymlink(expand('%'))
 
- " testing commenting autogroup:
- " http://learnvimscriptthehardway.stevelosh.com/chapters/14.html
- " https://stackoverflow.com/questions/1676632/whats-a-quick-way-to-comment-uncomment-lines-in-vim
-augroup commenting
-    autocmd!
-    autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-    autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-    autocmd FileType conf,fstab       let b:comment_leader = '# '
-    autocmd FileType tex              let b:comment_leader = '% '
-    autocmd FileType mail             let b:comment_leader = '> '
-    autocmd FileType vim              let b:comment_leader = '" '
-augroup END
-
-noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+let g:vim_markdown_frontmatter = 1
 "-]

@@ -30,14 +30,15 @@ p {
     font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif;
     line-height: 1.2em;
     color: #333;
+    text-align: justify;
 }
 footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
 }
 
-ul.posts { 
-    margin: 20px auto 40px; 
+ul.posts {
+    margin: 20px auto 40px;
     font-size: 1.2em;
 }
 

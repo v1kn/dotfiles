@@ -251,8 +251,9 @@ alias pkeys='xmodmap -e "keycode 101 = ISO_Level3_Shift"'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
-alias tvb='mpv --ytdl-format=22 $1'
-alias tvm='mpv --ytdl-format=18 $1'
+alias tvb='mpv --ytdl-format="22/best" $1'
+alias tvm='mpv --ytdl-format="18/best" $1'
+#mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]/best"
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
 # -]
 #   FUNCTIONS [-
@@ -522,6 +523,7 @@ md2html() {
         -f "${format[*]}"
         --standalone                # -s produce output with header and footer
         --smart                     # -S produce typographically correct output
+        --toc
         -c $HOME/.pandoc/css/jekyll-test.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
