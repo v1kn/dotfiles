@@ -1,6 +1,6 @@
 body {
     margin: 60px auto;
-    width: 70%;
+    width: 50%;
 }
 nav ul, footer ul {
     /*font-family:'Helvetica', 'Arial', 'Sans-Serif';*/
@@ -21,7 +21,7 @@ a:hover {
     text-decoration: underline;
 }
 h1 {
-2   font-size: 2em;
+    font-size: 1.5em;
     /*font-family:'Helvetica', 'Arial', 'Sans-Serif';*/
     font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif;
 }

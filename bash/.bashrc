@@ -509,15 +509,27 @@ termcheck() {
 md2html() {
     local IFS=+
     local format=(
-        markdown_github
-        footnotes
-        fenced_code_attributes
-        yaml_metadata_block
-        shortcut_reference_links
+        markdown
+        ascii_identifiers
+        auto_identifiers
+        autolink_bare_uris
+        backtick_code_blocks
         blank_before_header
+        emoji
+        escaped_line_breaks
+        fenced_code_attributes
+        fenced_code_blocks
+        footnotes
         implicit_header_references
-        superscript
+        intraword_underscores
+        pipe_tables
+        raw_html
+        shortcut_reference_links
+        shortcut_reference_links
+        strikeout
         subscript
+        superscript
+        yaml_metadata_block
     )
     local pandoc_options=(
         -f "${format[*]}"
@@ -532,16 +544,28 @@ md2html() {
 md2pdf() {
     local IFS=+
     local format=(
-        markdown_github
-        footnotes
-        fenced_code_attributes
-        yaml_metadata_block
-        shortcut_reference_links
+        markdown
+        ascii_identifiers
+        auto_identifiers
+        autolink_bare_uris
+        backtick_code_blocks
         blank_before_header
+        emoji
+        escaped_line_breaks
+        fenced_code_attributes
+        fenced_code_blocks
+        footnotes
         implicit_figures
         implicit_header_references
-        superscript
+        intraword_underscores
+        pipe_tables
+        raw_html
+        shortcut_reference_links
+        shortcut_reference_links
+        strikeout
         subscript
+        superscript
+        yaml_metadata_block
     )
     pandoc \
         -f "${format[*]}" \

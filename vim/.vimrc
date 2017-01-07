@@ -232,6 +232,11 @@ let g:startify_custom_header = []
 
 "let g:instant_markdown_autostart = 0
 ""-]
+"   Vim-markdown [-
+"   ------------
+
+let g:vim_markdown_frontmatter=1
+""-]
 "-]
 "   BASIC CONFIG [-
 "   ============
@@ -269,6 +274,7 @@ set textwidth=80            " wrap to 80 chars, when fo+=t is set
 set colorcolumn=80          " show 80 char mark
 set formatoptions=cqmM      " turn off automatic wrapping, enable multibyte
                                 " searching
+set formatprg=par\ -w80j    " better text processor under gq; default under gw
 set hlsearch                " search highlight
 set incsearch               " display match for pattern when halfway typing it
 set ignorecase              " ignore case while searching
@@ -308,7 +314,6 @@ endif
 " set term=xterm-256color       " set $TERM to xterm256
 " set t_Co=256
 "set listchars="eol:$,tab"
-" set formatprg=par\ -w70       " better external text processor
 "-]
 "   KEY MAPPINGS [-
 "   ============
@@ -449,8 +454,10 @@ function! Mdown()
     normal dd
     normal O---
     normal G
+    normal o---
     normal o
     normal o
+    syntax enable
 endfunction
 
 " commenting autogroup:
@@ -518,5 +525,8 @@ function! MyFollowSymlink(...)
     \ w:no_resolve_symlink
  au BufReadPost * nested call MyFollowSymlink(expand('%'))
 
-let g:vim_markdown_frontmatter = 1
+"turn the whole document into a softwrapped text
+command! SoftWrap
+            \ <line2>put _ |
+            \ <line1>,<line2>g/.\+/ .;-/^$/ join |normal $x
 "-]

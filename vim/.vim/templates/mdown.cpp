@@ -4,4 +4,3 @@ date:
 tags:
 source:
 link:
-...
