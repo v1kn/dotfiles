@@ -1,4 +1,3 @@
-
 "   VIM-PLUG [-
 "   ========
 
@@ -18,7 +17,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'plasticboy/vim-markdown'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
-Plug 'mhinz/vim-tmuxify'
 Plug 'tpope/vim-unimpaired'
 "Plug 'rking/ag.vim'
 "Plug 'chriskempson/base16-vim'

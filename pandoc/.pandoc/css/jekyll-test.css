@@ -26,7 +26,8 @@ h1 {
     font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif;
 }
 p {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
+    font-size: 16px;
     font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif;
     line-height: 1.2em;
     color: #333;

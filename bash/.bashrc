@@ -1,4 +1,3 @@
-
 #   PREAMBLE [-
 #   ========
 
@@ -302,7 +301,14 @@ spectro_flac() {
 }
 #   as above but more powerful; arrays, parallel processes and proper output
 spectro_mass() {
-    ext=( -name \*.wav -o -name \*.flac -o -name \*.ape -o -name \*.m4a -o -name \*.mp3 -o -name \*.ogg )
+    local ext=(
+        -name \*.wav
+        -o -name \*.flac
+        -o -name \*.ape
+        -o -name \*.m4a
+        -o -name \*.mp3
+        -o -name \*.ogg
+    )
     find . -depth -type f \( "${ext[@]}" \) -print0 \
         | sort -zn \
         | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
@@ -524,18 +530,20 @@ md2html() {
         intraword_underscores
         pipe_tables
         raw_html
-        shortcut_reference_links
+        raw_tex
         shortcut_reference_links
         strikeout
         subscript
         superscript
+        tex_math_dollars
         yaml_metadata_block
     )
     local pandoc_options=(
         -f "${format[*]}"
         --standalone                # -s produce output with header and footer
         --smart                     # -S produce typographically correct output
-        --toc
+        --toc                       # table of contents
+        --mathml                    # displaying math enclosed in `$`
         -c $HOME/.pandoc/css/jekyll-test.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
@@ -560,11 +568,12 @@ md2pdf() {
         intraword_underscores
         pipe_tables
         raw_html
-        shortcut_reference_links
+        raw_tex
         shortcut_reference_links
         strikeout
         subscript
         superscript
+        tex_math_dollars
         yaml_metadata_block
     )
     pandoc \
