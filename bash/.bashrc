@@ -250,8 +250,8 @@ alias pkeys='xmodmap -e "keycode 101 = ISO_Level3_Shift"'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
-alias tvb='mpv --ytdl-format="22/best" $1'
-alias tvm='mpv --ytdl-format="18/best" $1'
+alias tvb='mpv --ytdl-format="22/Source/best" $1'
+alias tvm='mpv --ytdl-format="18/Medium/best" $1'
 #mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]/best"
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
 # -]
@@ -528,6 +528,7 @@ md2html() {
         footnotes
         implicit_header_references
         intraword_underscores
+        link_attributes
         pipe_tables
         raw_html
         raw_tex
@@ -566,6 +567,7 @@ md2pdf() {
         implicit_figures
         implicit_header_references
         intraword_underscores
+        link_attributes
         pipe_tables
         raw_html
         raw_tex
@@ -580,6 +582,7 @@ md2pdf() {
         -f "${format[*]}" \
         -V fontsize=12pt \
         -V mainfont="Noto Sans" \
+        -V urlcolor="cyan" \
         -V CJKmainfont="TakaoMincho" \
         --latex-engine=xelatex \
         -S \

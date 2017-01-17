@@ -25,7 +25,7 @@ Plug 'tpope/vim-unimpaired'
 "PLug 'Raimondi/delimitMate'
 "Plug 'Konfekt/FastFold'
 "Plug 'haya14busa/incsearch.vim'
-"Plug 'itchyny/lightline.vim
+"Plug 'itchyny/lightline.vim'
 "PLug 'Shougo/neocomplete.vim'
 "Plug 'scrooloose/nerdtree'
 "Plug 'chrisbra/NrrwRgn'
@@ -184,7 +184,7 @@ let g:ctrlp_show_hidden = 1
 "   Gitgutter [-
 
 "let g:gitgutter_map_keys = 0
-
+let g:gitgutter_sign_added = '❖'
 ""-]
 "   Goyo [-
 "   ----
@@ -280,6 +280,7 @@ set smartcase               " ignore case while searching
 "   syntax
 syntax on
 syntax enable
+syntax sync minlines=200    " syntax is correctly highlighted up to 200 lines
 "   modes
 set timeoutlen=1000         " fix delay in switching between modes
 set ttimeoutlen=0           " fix delay in switching between modes
@@ -385,7 +386,6 @@ nnoremap <leader>gs :Gstatus<CR>
 " bindings for commenting function
 noremap <silent> <leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> <leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
 "-]
 "   THEMING [-
 "   =======
