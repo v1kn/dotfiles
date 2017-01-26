@@ -14,9 +14,6 @@ $endif$
 $if(source-meta)$
   <meta name="source" content="$source-meta$" />
 $endif$
-$if(link-meta)$
-  <meta name="link" content="$link-meta$" />
-$endif$
 <!-- end of mod -->
 $if(keywords)$
   <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
@@ -58,12 +55,17 @@ $if(date)$
 <h3 class="date">$date$</h3>
 $endif$
 <!-- modified to add source and link metadata entries -->
-$if(source)$
-<h4 class="source">$source$</h4>
+$for(source)$
+$if(source.name)$
+<h4 class="source">$source.name$</h4>
+$if(source.link)$ ($source.link$)$endif$
+$else$
+$source$
 $endif$
-$if(link)$
+$endfor$
+<!--$for(link)$
 <h4 class="link">$link$</h4>
-$endif$
+$endfor$-->
 <!-- end of mod -->
 </div>
 $endif$
@@ -76,5 +78,43 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
+<!--mod script from here:
+    https://www.sitepoint.com/best-practice-for-code-examples/ -->
+<script type="text/javascript">
+(function()
+{
+    if(typeof(window.getComputedStyle) == 'undefined') 
+    { 
+	return;
+    }
+
+    var pre = document.getElementsByTagName('pre');
+
+    for(var len = pre.length, i = 0; i < len; i ++)
+    {
+	var code = pre[i].getElementsByTagName('code').item(0);
+	if(!code)
+	{
+	    code = pre[i].getElementsByTagName('samp').item(0);
+	    if(!code)
+	    {
+		continue;
+	    }
+	}
+
+	var column = document.createElement('div');
+        column.setAttribute('aria-hidden', 'true');
+
+	for(var n = 0; n < code.innerHTML.split(/[\n\r]/g).length; n ++)
+	{
+	    column.appendChild(document.createElement('span'));
+	}
+
+	pre[i].insertBefore(column, code);
+	pre[i].className = 'line-numbers';
+    }
+})();
+</script>
 </body>
+
 </html>

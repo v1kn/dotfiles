@@ -137,7 +137,7 @@ function! LightlineFugitive()
   return ''
 endfunction
 ""-]
-"   AIRLINE [-
+"   Airline [-
 "   -------
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
@@ -290,11 +290,6 @@ set t_ut=                   " allows for ctrl-arrow in visual mode
 set shiftwidth=4            " nr of spaces used for autoindenting
 set softtabstop=4           " pretend like spaces are a tab when pressing <BS>
 set expandtab
-"   colorscheme related
-set termguicolors           " true colors in terminals that support it
-let g:solarized_termtrans=0 " non-transparent background
-set background=dark
-colorscheme solarized8_dark
 "   misc
 set gdefault                " the /g flag on :s substitutions by default
 set confirm                 " confirming saving changes
@@ -403,6 +398,11 @@ highlight Cursorline cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 
 "   Italics in comments (solorscheme has to allow it)
 highlight Comment cterm=italic
+"   colorscheme related
+set termguicolors           " true colors in terminals that support it
+let g:solarized_termtrans=0 " non-transparent background
+set background=dark
+colorscheme solarized8_dark
 "-]
 "   COMMANDS AND FUNCTIONS [-
 "   ======================

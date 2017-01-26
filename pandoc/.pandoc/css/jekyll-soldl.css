@@ -1,6 +1,9 @@
 body {
-    margin: 60px auto;
+    /*margin: 60px auto;*/
+    margin-left: 2cm;
     width: 50%;
+    background: #073642; /* solarized dark */
+    color: #839496;
 }
 nav ul, footer ul {
     /*font-family:'Helvetica', 'Arial', 'Sans-Serif';*/
@@ -30,8 +33,9 @@ p {
     font-size: 16px;
     font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif;
     line-height: 1.2em;
-    color: #333;
+    /*color: #333;*/
     text-align: justify;
+    font-color: #839496;
 }
 footer {
     border-top: 1px solid #d5d5d5;
@@ -55,7 +59,12 @@ ul.posts li {
 pre, pre *
 {
     font:normal normal normal 1em/1.4 monaco, courier, monospace;
-    background-color: #e5e5e5;
+    background-color: #fdf6e3;
+    color: #657b83;
+    /* solarized dark
+     * background: #002b36; /* solarized dark
+     * color: #839496;
+     */
 }
 pre
 {
@@ -65,8 +74,15 @@ pre, pre code, pre samp
 {
     display:block;
     margin:0;
-    border-radius: 5px;
-    background-color: #e5e5e5;
+    cursor:text;
+    /* solarized light */
+    background-color: #fdf6e3;
+    font-color: #657b83;
+    /* solarized dark
+     * background-color: #002b36; /* solarized dark
+     * font-color: #839496;
+     */
+    border-radius: 15px;
 }
 pre code, pre samp
 {
@@ -74,7 +90,7 @@ pre code, pre samp
     white-space:pre;
     /* enforce word-wrap for mobile safari */
     word-wrap:normal;
-    padding: 5px;
+    padding:10px;
     -moz-tab-size:4;
     -o-tab-size:4;
     tab-size:4;
@@ -93,7 +109,7 @@ pre.line-numbers
 {
     position:relative;
 }
-pre.line-numbers code,
+pre.line-numbers code, 
 pre.line-numbers samp
 {
     margin-left:3em;
@@ -108,11 +124,12 @@ pre.line-numbers > div
     left:0;
     height:100%;
     border-radius:0 0 0 3px;
-    background: #e5e5e5;
+    background: #fdf6e3; /* solarized light */
+    /*background: #002b36; /* solarized dark */
     overflow:hidden;
     counter-reset:line;
 }
-
+ 
 pre.line-numbers > div > span
 {
     display:block;
@@ -133,7 +150,8 @@ pre.line-numbers > div > span:first-child
 }
 pre.line-numbers > div > span:nth-child(odd)
 {
-    background: #dfdfdf;
+    background:#eee8d5; /* solarized light */
+    /*background:#073642; solarized dark */
 }
 
 @media print
@@ -152,7 +170,7 @@ pre.line-numbers > div > span:nth-child(odd)
     {
         display:none;
     }
-    pre.line-numbers > code,
+    pre.line-numbers > code, 
     pre.line-numbers > samp
     {
         margin-left:0;
@@ -176,4 +194,3 @@ pre i, pre em, pre i *, pre em *, pre i * *, pre em * *
     font-style:normal;
     color:#c55;
 }
-

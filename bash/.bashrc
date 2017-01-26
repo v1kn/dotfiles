@@ -13,6 +13,7 @@ export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
 export CARGO_HOME=$HOME/.local/cargo
 export QT_QPA_PLATFORMTHEME=qt5ct
+export CHEATCOLORS=true
 
 #   fixing duplicated path in tmux
 [[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
@@ -545,7 +546,6 @@ md2html() {
         --smart                     # -S produce typographically correct output
         --toc                       # table of contents
         --mathml                    # displaying math enclosed in `$`
-        -c $HOME/.pandoc/css/jekyll-test.css     # path to custom css styles
     )
     pandoc "${pandoc_options[@]}" "$@"
 }
