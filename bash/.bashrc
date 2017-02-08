@@ -12,8 +12,9 @@ export EDITOR='vim'
 export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
 export CARGO_HOME=$HOME/.local/cargo
-export QT_QPA_PLATFORMTHEME=qt5ct
 export CHEATCOLORS=true
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 #   fixing duplicated path in tmux
 [[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
@@ -255,6 +256,7 @@ alias tvb='mpv --ytdl-format="22/Source/best" $1'
 alias tvm='mpv --ytdl-format="18/Medium/best" $1'
 #mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]/best"
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
+alias showio='cat /sys/block/sda/queue/scheduler'
 # -]
 #   FUNCTIONS [-
 #   =========
@@ -445,6 +447,18 @@ CountLines_NoNewline_NoHashComment() {
 }
 alias clin='CountLines_NoNewline'
 alias clinc='CountLines_NoNewline_NoHashComment'
+
+# show file creation time
+# source: https://gist.github.com/moiseevigor/8c496f632137605b322e
+xstat() {
+    for target in "${@}"; do
+        inode=$(ls -di "${target}" | cut -d ' ' -f 1)
+        fs=$(df "${target}"  | tail -1 | awk '{print $1}')
+        crtime=$(sudo debugfs -R 'stat <'"${inode}"'>' "${fs}" 2>/dev/null |
+        grep -oP 'crtime.*--\s*\K.*')
+        printf "%s\t%s\n" "${crtime}" "${target}"
+    done
+}
 # -]
 #   Web [-
 #   ---

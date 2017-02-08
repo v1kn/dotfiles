@@ -11,3 +11,6 @@ colorscheme indigo-fx3
 "highlight HintElem color: black; background-color: yellow
 "highlight HintActive background-color: #88FF00; color: black
 "hi Hint font-family: monospace; font-size: 10px; font-weight: bold; color: white; background-color: red; border-color: #1c1c1c; border-width: 0px; border-style: solid; padding: 2px 2px 2px 2px;
+
+autocmd LocationChange .*                             js modes.passAllKeys = false
+autocmd LocationChange mail\\.google\\.com            js modes.passAllKeys = true
