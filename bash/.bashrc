@@ -161,17 +161,14 @@ export HISTIGNORE="ls:ll:history:cd"
 #   package management
 alias upda='sudo pacman -Syu'
 alias updaa='sudo pacman -Syyu'
-alias updo='sudo zypper up'
 alias updu='sudo apt update && sudo apt full-upgrade'
 
 alias insa='sudo pacman -S'
 alias insaa='pacaur -ayu'
-alias inso='sudo zypper in'
 alias insu='sudo apt install'
 
 alias sera='pacman -Ss'
 alias seraa='pacaur -a'
-alias sero='zypper se'
 alias seru='apt search'
 
 alias showa='pacman -Sii'
@@ -179,7 +176,6 @@ alias showu='aptitude show'
 
 alias rmva='sudo pacman -Rns'
 alias rmvaa='sudo pacman -Rns $(pacman -Qqdt)'
-alias rmvo='sudo zypper rm'
 alias rmvu='sudo apt-get --purge remove'
 alias rmvuu='sudo apt-get --purge autoremove'
 
@@ -410,7 +406,9 @@ checkppa() {
         url="http://ppa.launchpad.net/$ppa/ubuntu/dists/$dist/"
         if [[ $(wget -O /dev/null "$url" 2>&1|grep "200 OK"|wc -l) == "0" ]]
         then
-            echo "$ppa does not have a $dist version"
+            echo -e "$ppa:\t\t\tNOPE, REMOVE IT!"
+        else
+            echo -e "$ppa:\t\t\tOK!"
         fi
     done <<< "$ppas"
 }
@@ -512,10 +510,17 @@ getpage() {
 #   -----
 
 #   adding all virtual machines to virtualbox at once
+#   usage: vbox_add <path to root of /virt/vm>
 vbox_add() {
-    while read vm; do
-        VBoxManage registervm "$vm"
-    done <<< $(find "/media/wde2/virt/vm/" -depth -type f -name "*.vbox")
+    curvm=$(VBoxManage list vms | cut -d\" -f2 | wc -l)
+    if [[ $curvm != 0 ]]; then
+        while read vm; do
+            VBoxManage unregistervm "$vm"
+        done <<< $(VBoxManage list vms | cut -d\" -f2)
+    fi
+    while read vm2; do
+        VBoxManage registervm "$vm2"
+    done <<< $(find ""$1"/virt/vm" -depth -type f -name "*.vbox")
 }
 
 top10() {
