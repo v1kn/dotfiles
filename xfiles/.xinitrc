@@ -53,7 +53,7 @@ kalu &
 redshift
 #$HOME/lemonbar-sample.sh | lemonbar -p -F "#000000" -B "#F23F23" -g "1000x16+180+0" -b &
 #xautolock -time 5 -locker "i3lock -f -e -c 232323" -notify 30 -notifier "notify-send -u critical 'LOCKING screen in 30 seconds'" &
-xautolock -time 5 -locker "$HOME/bin/lock.sh" &
+xautolock -time 5 -locker "$HOME/bin/lock" &
 
 
 #==start X session==

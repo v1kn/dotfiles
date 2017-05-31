@@ -1,0 +1,6 @@
+[Unit]
+Description=generate mirrorlist
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/reflector -c Poland -l 10 -f 5 --save /etc/pacman.d/mirrorlist

@@ -1,0 +1,10 @@
+[Unit]
+Description=keep synapse running
+After=graphical.target
+
+[Service]
+ExecStart=/usr/bin/synapse
+Restart=always
+
+[Install]
+WantedBy=default.target

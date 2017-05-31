@@ -13,8 +13,11 @@ export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
 export CARGO_HOME=$HOME/.local/cargo
 export CHEATCOLORS=true
-export QT_QPA_PLATFORMTHEME=qt5ct
+# Xubuntu desktop tweaks
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
+#export QT_QPA_PLATFORMTHEME=qt5ct
+#export GTK_OVERLAY_SCROLLING=0
+#export CLUTTER_BACKEND=x11
 
 #   fixing duplicated path in tmux
 [[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
@@ -252,11 +255,18 @@ alias pkeys='xmodmap -e "keycode 101 = ISO_Level3_Shift"'
 alias lsblk='lsblk -o NAME,SIZE,FSTYPE,TYPE,LABEL,MOUNTPOINT,UUID'
 alias subs='subdownloader -c -l en --rename-subs -V'
 alias wfup='sudo nmcli c up id sadzo'
-alias tvb='mpv --ytdl-format="22/Source/best" $1'
-alias tvm='mpv --ytdl-format="18/Medium/best" $1'
+alias tvb='mpv --ytdl-format="22/Source/[height=720]/best" $1'
+alias tvm='mpv --ytdl-format="18/Medium/medium/[height<=480]/best" $1'
 #mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]/best"
 alias mpvtb='mpv --script-opts=osc-layout=topbar'
 alias showio='cat /sys/block/sda/queue/scheduler'
+
+#   systemd
+alias lt='systemctl list-timers'
+alias mlt='systemctl --user list-timers'
+alias st='systemctl status'
+alias mst='systemctl --user status'
+alias jrn='journalctl -xe'
 # -]
 #   FUNCTIONS [-
 #   =========
@@ -324,7 +334,7 @@ alias spcf='spectro_flac'
 #   -----
 
 twitchb() {
-    livestreamer \
+    streamlink \
         --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 \
         --retry-open 8000 \
         --retry-streams 10 \
@@ -335,7 +345,7 @@ twitchb() {
         https://twitch.tv/$1 best
 }
 twitchm() {
-    livestreamer \
+    streamlink \
         --http-header Client-ID=jzkbprff40iqj646a697cyrvl0zt2m6 \
         --retry-open 8000 \
         --retry-streams 10 \
@@ -343,7 +353,7 @@ twitchm() {
         --player-passthrough hls \
         --hls-segment-threads 3 \
         --player "mpv" \
-        https://twitch.tv/$1 medium
+        https://twitch.tv/$1 360p
 }
 
 subs-mass() {
@@ -384,7 +394,7 @@ showheader() {
     done <<< $(dpkg-query -l linux-header* | grep 'ii ')
 }
 showkernel() {
-    dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.4' | awk '{print $2}'
+    dpkg-query -l linux-image* | grep 'ii ' | fgrep '4.' | awk '{print $2}'
 }
 
 #   list all PPAs installed
@@ -458,6 +468,10 @@ xstat() {
         grep -oP 'crtime.*--\s*\K.*')
         printf "%s\t%s\n" "${crtime}" "${target}"
     done
+}
+
+refile() {
+    rename 's/ +\././; y/A-Z /a-z_/' "$@"
 }
 # -]
 #   Web [-

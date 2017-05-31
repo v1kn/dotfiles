@@ -1,0 +1,7 @@
+[Unit]
+Description=update pip packages
+
+[Service]
+Type=oneshot
+ExecStart=/home/vlkn/.local/bin/pipgem
+NoNewPrivileges=true

@@ -1,0 +1,11 @@
+[Unit]
+Description=prevent screen tearing on Xfce with nvidia GPU
+After=graphical.target
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+
+[Install]
+WantedBy=default.target

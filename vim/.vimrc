@@ -408,8 +408,8 @@ colorscheme solarized8_dark
 "   ======================
 
 "   folding in vimrc and bash
-autocmd FileType vim,sh,text setlocal foldmethod=marker
-autocmd FileType vim,sh,text setlocal foldmarker=[-,-]
+autocmd FileType vim,sh,text,javascript setlocal foldmethod=marker
+autocmd FileType vim,sh,text,javascript setlocal foldmarker=[-,-]
 
 "   remove trailing white space
 command! Nows :%s/\s\+$//

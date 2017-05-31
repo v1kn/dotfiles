@@ -1,0 +1,7 @@
+[Unit]
+Description=btrfs scrub on %f
+
+[Service]
+Nice=19
+IOSchedulingClass=Idle
+ExecStart=/usr/bin/btrfs scrub start -B %f

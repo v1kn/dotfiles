@@ -42,3 +42,12 @@ ffmpeg -i infile.avi -sameq -vcodec libx264 -threads 9 -acodec copy outfile.mkv
 # when there is an error "missing headers or frames"
 # add appropriate flags, like so
 ffmpeg -fflags +genpts -i infile outfile
+
+# embedding hardsubs in a video
+# .ssa and .ass subs will have formatting inside its metadata
+ffmpeg -i infile -vf subtitles=subs.ass -c:a copy outfile
+# for srt subs, the formatting has to be a part of ffmpeg invocation:
+ffmpeg -i infile -vf "subtitles=subs.srt:force_style='Fontsize=24,PrimaryColour=&H0000ff&'" -c:a copy ouftile
+
+# embedding softsubs in a video
+ffmpeg -i infile -i subtitles.ass -codec copy utfile

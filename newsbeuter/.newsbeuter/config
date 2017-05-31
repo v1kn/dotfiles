@@ -60,6 +60,8 @@ bind-key ^F pagedown
 bind-key ^B pageup
 bind-key ^U show-urls
 macro w set browser "feh %u" ; open ; set browser "firefox %u" ; quit
+macro e set browser "echo %u >> ~/.newsbeuter/queue" ; open ; set browser "firefox %u"
+
 
 #--------------
 # notifications

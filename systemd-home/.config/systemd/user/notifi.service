@@ -1,0 +1,9 @@
+[Unit]
+Description=start notifi script
+
+[Service]
+ExecStart=/home/vlkn/grepo/bin/notifi
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
