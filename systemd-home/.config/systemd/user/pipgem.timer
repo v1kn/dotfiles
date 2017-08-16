@@ -3,8 +3,9 @@ Description=update pip packages
 
 [Timer]
 OnCalendar=daily
-AccuracySec=1h
+#AccuracySec=15min
+RandomizedDelaySec=15min
 Persistent=true
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=timers.target

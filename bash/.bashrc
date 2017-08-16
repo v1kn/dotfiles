@@ -11,6 +11,8 @@ esac
 export EDITOR='vim'
 export VISUAL='vim'
 export GEM_PATH=$HOME/.local/gem
+#export GEM_HOME=$HOME/.local/gem   #currently defined in .gemrc
+#export GEM_SPEC_CACHE=$HOME/.local/gem/specs
 export CARGO_HOME=$HOME/.local/cargo
 export CHEATCOLORS=true
 # Xubuntu desktop tweaks

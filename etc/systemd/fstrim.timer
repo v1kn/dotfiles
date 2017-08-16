@@ -1,9 +1,13 @@
 [Unit]
 Description=Discard unused blocks daily
+Documentation=man:fstrim
 
 [Timer]
 OnCalendar=daily
-AccuracySec=1h
+#AccuracySec=15min
+#OnBootSec=15min
+#OnUnitActiveSec=24h
+RandomizedDelaySec=15min
 Persistent=true
 
 [Install]

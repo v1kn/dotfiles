@@ -50,4 +50,17 @@ ffmpeg -i infile -vf subtitles=subs.ass -c:a copy outfile
 ffmpeg -i infile -vf "subtitles=subs.srt:force_style='Fontsize=24,PrimaryColour=&H0000ff&'" -c:a copy ouftile
 
 # embedding softsubs in a video
-ffmpeg -i infile -i subtitles.ass -codec copy utfile
+# disposition will set subs as default
+ffmpeg -i infile -i subtitles.ass -codec copy -disposition:s:0 default outfile
+# more complicated version (not always necesary)
+ffmpeg -i infile.mkv -i subtitles.srt -c:v copy -c:a copy -c:s srt -map 0:0 -map 0:1 -map 1:0 -disposition:s:0 default outfile.mkv
+
+##  extract subtitles from mkv
+##  the last 0 in `0:s:0` depends on how many subs are in the file
+ffmpeg -i moviefile.mkv -map 0:s:0 subs.srt
+
+##  add softsubs into mkv and delay the subs by 7s
+##  `-itsoffset` has to come before the subtitle input file
+ffmpeg -i moviefile.mkv -itsoffset 7 -i subsfile.srt -c copy -disposition:s:0 default outfile.mkv
+##  do the same in a loop
+for file in *.mkv; do ffmpeg -i "$file" -itsoffset 7 -i "${file%.mkv}.srt" -c copy -disposition:s:0 default "${file%.mkv}2.mkv"; done

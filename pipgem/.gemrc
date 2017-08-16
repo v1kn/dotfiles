@@ -1,0 +1,5 @@
+---
+gemhome: /home/vlkn/.local/gem
+gempath: /home/vlkn/.local/gem
+gemspeccache: /home/vlkn/.local/gem/specs
+gem: --no-document

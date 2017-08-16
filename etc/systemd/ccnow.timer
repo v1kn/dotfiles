@@ -1,0 +1,9 @@
+[Unit]
+Description=runs cache cleaning every 3hrs
+
+[Timer]
+OnBootSec=3h
+OnUnitActiveSec=3h
+
+[Install]
+WantedBy=timers.target

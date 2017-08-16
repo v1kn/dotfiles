@@ -1,0 +1,7 @@
+[Unit]
+Description=cleans RAM and swap cache
+AssertPathExists=/usr/local/bin/ccnow
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ccnow
