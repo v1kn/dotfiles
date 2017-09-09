@@ -1,5 +1,3 @@
 ---
-gemhome: /home/vlkn/.local/gem
-gempath: /home/vlkn/.local/gem
-gemspeccache: /home/vlkn/.local/gem/specs
+gemhome: /home/vlkn/.gem/ruby/2.3.0
 gem: --no-document

@@ -10,10 +10,7 @@ esac
 #   export variables
 export EDITOR='vim'
 export VISUAL='vim'
-export GEM_PATH=$HOME/.local/gem
-#export GEM_HOME=$HOME/.local/gem   #currently defined in .gemrc
-#export GEM_SPEC_CACHE=$HOME/.local/gem/specs
-export CARGO_HOME=$HOME/.local/cargo
+#export CARGO_HOME=$HOME/.local/cargo
 export CHEATCOLORS=true
 # Xubuntu desktop tweaks
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
@@ -303,7 +300,7 @@ PlayCurrentDir() {
 alias pcd='PlayCurrentDir'
 
 #   multi-folder spectrograms
-spectro_flac() {
+spec_flac() {
     find . -depth -type f -name "*.flac" -print0 \
         | sort -zn \
         | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
@@ -311,7 +308,7 @@ spectro_flac() {
     echo processed "{}"'
 }
 #   as above but more powerful; arrays, parallel processes and proper output
-spectro_mass() {
+spec_mass() {
     local ext=(
         -name \*.wav
         -o -name \*.flac
@@ -325,8 +322,19 @@ spectro_mass() {
         | xargs -0 -I{} -n1 -P$(($(nproc) / 2)) \
         sh -c 'sox "{}" -n spectrogram -o "{}.png"; echo processed "{}"'
 }
-alias spc='spectro_mass'
-alias spcf='spectro_flac'
+alias spc='spec_mass'
+alias spcf='spec_flac'
+spec_bit() {
+    local ext=(
+        -name \*.mkv
+        -o -name \*.mp4
+        -o -name \*.avi
+    )
+    find . -depth -type f \( "${ext[@]}" \) -print0 \
+        | sort -zn \
+        | xargs -0 -I{} -n1 -P$(($(nproc) / 4)) \
+        sh -c 'pbr "{}" -o "{}.png"; echo processed "{}"'
+}
 # -]
 #   Video [-
 #   -----
@@ -408,9 +416,9 @@ checkppa() {
         url="http://ppa.launchpad.net/$ppa/ubuntu/dists/$dist/"
         if [[ $(wget -O /dev/null "$url" 2>&1|grep "200 OK"|wc -l) == "0" ]]
         then
-            echo -e "$ppa:\t\t\tNOPE, REMOVE IT!"
+            echo -e "$ppa:\tNOPE, REMOVE IT!"
         else
-            echo -e "$ppa:\t\t\tOK!"
+            echo -e "$ppa:\tOK!"
         fi
     done <<< "$ppas"
 }
