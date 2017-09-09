@@ -64,3 +64,7 @@ ffmpeg -i moviefile.mkv -map 0:s:0 subs.srt
 ffmpeg -i moviefile.mkv -itsoffset 7 -i subsfile.srt -c copy -disposition:s:0 default outfile.mkv
 ##  do the same in a loop
 for file in *.mkv; do ffmpeg -i "$file" -itsoffset 7 -i "${file%.mkv}.srt" -c copy -disposition:s:0 default "${file%.mkv}2.mkv"; done
+
+##  add ass subtitles and attach fonts to the video
+##  streams: 0-video 1-audio 2-subs 3-font
+ffmpeg -i infile.mp4 -i subs.ass -attach somefont.ttf -metadata:s:3 mimetype=application/x-truetype-font -c copy -disposition:s:0 default outfile.mkv
