@@ -59,6 +59,11 @@ ranger/.config/ranger/commands_sample.py
 ranger/.config/ranger/history
 ranger/.config/ranger/tagged
 
+#   systemd
+systemd-home/.config/systemd/user/default.target.wants/
+systemd-home/.config/systemd/user/multi-user.target.wants/
+systemd-home/.config/systemd/user/timers.target.wants/
+
 #   vimperator
 vimperator/.vimperator/info/
 

@@ -160,7 +160,7 @@ export HISTIGNORE="ls:ll:history:cd"
 #   package management
 alias upda='sudo pacman -Syu'
 alias updaa='sudo pacman -Syyu'
-alias updu='sudo apt update && sudo apt full-upgrade'
+alias updu='sudo apt update && sudo apt full-upgrade && sudo snap refresh'
 
 alias insa='sudo pacman -S'
 alias insaa='pacaur -ayu'
