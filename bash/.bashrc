@@ -17,6 +17,8 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0
 #export QT_QPA_PLATFORMTHEME=qt5ct
 #export GTK_OVERLAY_SCROLLING=0
 #export CLUTTER_BACKEND=x11
+#xu1704 caffeine workaround
+#export NO_AT_BRIDGE=1
 
 #   fixing duplicated path in tmux
 [[ -z $TMUX ]] && PATH="$PATH:$HOME/.local/bin"
