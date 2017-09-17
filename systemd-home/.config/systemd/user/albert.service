@@ -1,0 +1,11 @@
+[Unit]
+Description=launch albert
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/albert
+EmainAfterExit=1
+
+[Install]
+WantedBy=default.target
