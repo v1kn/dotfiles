@@ -14,7 +14,7 @@ export VISUAL='vim'
 export CHEATCOLORS=true
 # Xubuntu desktop tweaks
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
-#export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORMTHEME=qt5ct
 #export GTK_OVERLAY_SCROLLING=0
 #export CLUTTER_BACKEND=x11
 #xu1704 caffeine workaround

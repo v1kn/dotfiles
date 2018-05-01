@@ -35,17 +35,10 @@ windows:
         - 
         - htop
         - ranger
-  - news:
-      layout: a67b,170x42,0,0[170x31,0,0{90x31,0,0,5,25x31,91,0,19,53x31,117,0,17},170x10,0,32,11]
-      panes:
-        - newsbeuter
-        - 
-        - vim
-        - podbeuter
   - sys:
       layout: 66db,174x44,0,0{87x44,0,0,2,86x44,88,0,10}
       panes: 
-        - vim
+        -
         - 
   - dl:
       panes:

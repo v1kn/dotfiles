@@ -53,9 +53,7 @@ pandoc/.pandoc/+
 !pandoc/.pandoc/templates
 
 #   ranger
-ranger/.config/ranger/examples/
 ranger/.config/ranger/bookmarks
-ranger/.config/ranger/commands_sample.py
 ranger/.config/ranger/history
 ranger/.config/ranger/tagged
 
