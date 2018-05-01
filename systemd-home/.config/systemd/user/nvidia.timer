@@ -1,0 +1,9 @@
+[Unit]
+Description=prevent screen tearing on Xfce with Nvidia GPU
+After=graphical.target
+
+[Timer]
+OnBootSec=1min
+
+[Install]
+WantedBy=timers.target
