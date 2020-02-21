@@ -56,6 +56,7 @@ pandoc/.pandoc/+
 ranger/.config/ranger/bookmarks
 ranger/.config/ranger/history
 ranger/.config/ranger/tagged
+ranger/.config/ranger/colorschemes
 
 #   systemd
 systemd-home/.config/systemd/user/default.target.wants/
