@@ -1,7 +1,0 @@
-##
-##  unoconv
-##      :: tool for converting formats supported by libreoffice
-##
-
-# convert txt to doc
-unoconv -f doc infile.txt

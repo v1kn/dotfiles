@@ -67,7 +67,8 @@ systemd-home/.config/systemd/user/timers.target.wants/
 vimperator/.vimperator/info/
 
 #   zathura
-zathura/.local/
+zathura/.local/share/zathura/*
+
 
 #   whole apps
 atom/

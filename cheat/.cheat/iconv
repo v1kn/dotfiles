@@ -1,3 +1,0 @@
-# transcoding from EUC-JP (kanjidic, kanjd212 dictionaries)
-
-iconv -f EUC-JP -t UTF-8 infile > outfile
